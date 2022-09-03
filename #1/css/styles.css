@@ -59,20 +59,45 @@ body {
 }
 
 .keys {
-  justify-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  height: 80vh;
+  max-width: 100%;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
-  align-self: center;
-  vertical-align: middle;
-  border: white 2px solid;
-  padding: 10px;
-  margin: 10px;
 }
 
 .key {
-  border: red 2px solid;
-  display: grid;
-  grid-template-columns: 2;
-  row-gap: 10px;
-  position: relative;
-  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  text-shadow: 0 0 5px #000;
+  color: white;
+  font-family: "Righteous", cursive;
+  text-align: center;
+  width: 100px;
+  transition: all 0.1s;
+  padding: 1rem 0.5rem;
+  font-size: 1.5rem;
+  margin: 1rem;
+  border-radius: 5px;
+  border: 2px solid #440000;
+  opacity: 70%;
+}
+
+.playing {
+  transform: scale(1.1);
+  opacity: 85%;
+  border-color: orangered;
+  box-shadow: 0 0 10px orangered;
+}
+kbd {
+  display: block;
+  font-size: 2.5rem;
+}
+
+.sound {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: orangered;
 }
