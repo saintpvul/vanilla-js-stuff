@@ -75,7 +75,7 @@ body {
   font-family: "Righteous", cursive;
   text-align: center;
   width: 100px;
-  transition: all 0.1s;
+  transition: all 0.06s ease;
   padding: 1rem 0.5rem;
   font-size: 1.5rem;
   margin: 1rem;
