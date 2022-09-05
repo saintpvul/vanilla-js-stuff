@@ -1,7 +1,8 @@
 :root {
   --base: #0f82a1;
   --spacing: 10px;
-  --blur: 10px;
+  --blur: 0px;
+  --gray: 0%;
 }
 
 * {
@@ -47,7 +48,7 @@ html {
 body {
   text-align: center;
   font-family: "Josefin Sans", sans-serif;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: white;
   font-weight: 100;
 }
@@ -55,7 +56,7 @@ body {
 .img {
   padding: var(--spacing);
   background: var(--base);
-  filter: blur(var(--blur));
+  filter: blur(var(--blur)) grayscale(var(--gray));
 }
 
 .heading {
@@ -76,9 +77,12 @@ body {
 }
 
 .controls {
-  margin-bottom: 2%;
+  margin: 2%;
+  display: flex;
+  justify-content: center;
 }
 
 input {
   width: 10%;
+  margin: 1%;
 }
