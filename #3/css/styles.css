@@ -11,6 +11,43 @@
   vertical-align: baseline;
 }
 
+html {
+  background-image: linear-gradient(
+    to left top,
+    #b7ede2,
+    #9be6d4,
+    #80dfc4,
+    #64d7b2,
+    #47cf9e,
+    #2dc4a3,
+    #13b8a6,
+    #00aca7,
+    #0097ac,
+    #2281a5,
+    #456a93,
+    #545479
+  );
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.hl {
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  text-align: center;
+  font-family: "Josefin Sans", sans-serif;
+  font-size: 3rem;
+  color: white;
+  font-weight: 100;
+}
+
+.img {
+}
+
 .heading {
   margin: 10px auto;
   color: white;

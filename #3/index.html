@@ -11,6 +11,12 @@
       href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200&display=swap"
       rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
@@ -18,7 +24,43 @@
       30Days JS challenge to upgrade js skills
     </h1>
 
-    <h2 class="heading">Day 3. Playing with CSS Variables and JS</h2>
+    <h2 class="heading">
+      Day 3. Playing with <span class="hl">CSS</span> Variables and
+      <span class="hl">JS</span>
+    </h2>
+
+    <div class="controls">
+      <label for="spacing"> Spacing </label>
+      <input
+        type="range"
+        name="spacing"
+        min="10"
+        max="200"
+        value="10"
+        data-sizing="px"
+      />
+
+      <label for="blur"> Blur </label>
+      <input
+        type="range"
+        name="blur"
+        min="0"
+        max="25"
+        value="10"
+        data-sizing="px"
+      />
+
+      <label for="base"> Base color </label>
+      <input type="color" name="base" value="#0f82a1" />
+    </div>
+
+    <img
+      class="img"
+      src="./assets/images/wave.jpg"
+      alt="no-img"
+      width="683"
+      height="384"
+    />
 
     <script type="module" src="./js/main.js"></script>
   </body>
