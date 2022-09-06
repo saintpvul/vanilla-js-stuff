@@ -74,3 +74,12 @@ console.log(fullNames);
 
 const ordered = inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
 console.table(ordered);
+
+//array.prototype.reduce()
+// 4. How many years did all the inventors live
+
+const totalYears = inventors.reduce((total, inventor) => {
+  return total + (inventor.passed - inventor.year);
+}, 0);
+
+console.log(totalYears);
