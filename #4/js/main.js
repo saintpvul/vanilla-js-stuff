@@ -59,3 +59,12 @@ const fifteen = investors.filter(
 );
 
 console.table(fifteen);
+
+//array.prototype.map()
+// 2. give up an array of the inventory first and last names
+
+const fullNames = investors.map(
+  (inventor) => inventor.first + " " + inventor.last
+);
+
+console.log(fullNames);
