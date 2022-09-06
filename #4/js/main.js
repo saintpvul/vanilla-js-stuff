@@ -1,4 +1,4 @@
-const investors = [
+const inventors = [
   { first: "Albert", last: "Einstein", year: 1879, passed: 1955 },
   { first: "Isaac", last: "Newton", year: 1643, passed: 1727 },
   { first: "Galileo", last: "Galilei", year: 1564, passed: 1642 },
@@ -54,7 +54,7 @@ const people = [
 
 //array.prototype.filter()
 // 1. filters the inventors for those who were born in the 1500's
-const fifteen = investors.filter(
+const fifteen = inventors.filter(
   (inventor) => inventor.year >= 1500 && inventor.year < 1600
 );
 
@@ -63,8 +63,14 @@ console.table(fifteen);
 //array.prototype.map()
 // 2. give up an array of the inventory first and last names
 
-const fullNames = investors.map(
+const fullNames = inventors.map(
   (inventor) => inventor.first + " " + inventor.last
 );
 
 console.log(fullNames);
+
+//array.prototype.sort()
+// 3. Sort the inventors by birthdate, oldest to youngest
+
+const ordered = inventors.sort((a, b) => (a.year > b.year ? 1 : -1));
+console.table(ordered);
