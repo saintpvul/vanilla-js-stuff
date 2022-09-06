@@ -146,3 +146,5 @@ const transportation = data.reduce(function (obj, item) {
 }, {});
 
 console.table(transportation);
+
+//complete
