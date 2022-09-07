@@ -1,6 +1,6 @@
 :root {
   --font-color: #ffffff;
-  --background: #666666;
+  --background: #000000;
 }
 
 * {
@@ -25,6 +25,13 @@ body {
   font-family: "Josefin Sans", sans-serif;
   font-weight: 200;
   text-align: center;
+}
+
+/* basic settings */
+
+/* starting animation */
+
+#disappear {
   animation-name: disappear;
   animation-duration: 4s;
   transition: ease-in-out;
@@ -40,4 +47,28 @@ body {
   100% {
     opacity: 0;
   }
+}
+
+#appear {
+  animation-name: appear;
+  animation-duration: 6s;
+  transition: ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*  */
+
+.panels {
+  text-align: center;
 }
