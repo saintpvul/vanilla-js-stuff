@@ -1,11 +1,7 @@
-let r = document.querySelector(":root");
-
-let randomBackground =
-  "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
-
-let randomBorder =
-  "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
-
-r.style.setProperty("--background", randomBackground);
-
-r.style.setProperty("--border-color", randomBorder);
+setInterval(function () {
+  var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+  document.documentElement.style.setProperty(
+    "--background-start",
+    "#" + randomColor
+  );
+}, 3000);
