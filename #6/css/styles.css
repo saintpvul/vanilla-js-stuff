@@ -1,0 +1,72 @@
+:root {
+  --background: ;
+  --opacity: 50%;
+  --grayscale: 50%;
+  --text-color: #ffffff;
+  --border-color: ;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+.bg {
+  background-color: var(--background);
+  filter: grayscale(var(--grayscale)) opacity(var(--opacity));
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+	tran
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 200;
+  font-size: 14px;
+  text-align: center;
+  align-items: center;
+  color: var(--text-color);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.7), 0 0 14px rgba(0, 0, 0, 0.45);
+}
+
+.heading {
+  z-index: 0;
+  font-size: 1.5em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex: 1;
+}
+
+.main-heading {
+  margin: 1%;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-form {
+  margin: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-form > input {
+  border: solid 10px var(--border-color);
+  width: 30%;
+  height: 10vh;
+  align-items: center;
+  border-radius: 15%;
+}

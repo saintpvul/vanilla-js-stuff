@@ -5,15 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ajax Type</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
-    <div class="heading" id="disappear">
-      <h1 class="main-heading">30Days JS challenge to upgrade js skills</h1>
+    <div class="bg">
+      <div class="heading">
+        <h1 class="main-heading">30Days JS challenge to upgrade js skills</h1>
 
-      <h2>Day 6. Ajax Type Ahead</h2>
+        <h2>Day 6. Ajax Type Ahead</h2>
+      </div>
+
+      <form class="search-form">
+        <input class="search" type="text" placeholder="City or State" />
+        <ul class="suggestions">
+          <li>Filter for a city</li>
+          <li>or a State</li>
+        </ul>
+      </form>
     </div>
-
     <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/random-background.js"></script>
   </body>
 </html>
