@@ -15,7 +15,7 @@ function matrix() {
   ctx.fillStyle = "#0001";
   ctx.fillRect(0, 0, w, h);
 
-  ctx.fillStyle = "#0f0";
+  ctx.fillStyle = "#f00";
   ctx.font = "15pt monospace";
 
   ypos.forEach((y, ind) => {
