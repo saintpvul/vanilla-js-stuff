@@ -9,3 +9,5 @@
 4# Day. Array Cardio Day 1 (console) // https://array-cardio-day-1.netlify.app/
 <br>
 5# Day. Flex Panels Image Gallery // https://flex-panel-images.netlify.app/
+<br>
+6# Day. Ajax Type Ahead // ajax-type-ahead-page.netlify.app
