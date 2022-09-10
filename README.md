@@ -10,4 +10,4 @@
 <br>
 5# Day. Flex Panels Image Gallery // https://flex-panel-images.netlify.app/
 <br>
-6# Day. Ajax Type Ahead // ajax-type-ahead-page.netlify.app
+6# Day. Ajax Type Ahead // https://ajax-type-ahead-page.netlify.app/
