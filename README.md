@@ -11,3 +11,5 @@
 5# Day. Flex Panels Image Gallery // https://flex-panel-images.netlify.app/
 <br>
 6# Day. Ajax Type Ahead // https://ajax-type-ahead-page.netlify.app/
+<br>
+7# Day. Array Cardio Day 2 // https://array-cardio-day-2.netlify.app/
