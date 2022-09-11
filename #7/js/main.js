@@ -1,3 +1,5 @@
+"use strict";
+
 const people = [
   { name: "Wes", year: 1988 },
   { name: "Kait", year: 1986 },
@@ -19,8 +21,14 @@ const comments = [
 const isAdult = people.some(function (person) {
   let currentYear = new Date().getFullYear();
   if (currentYear - person.year > 18) {
-    console.table(person);
   }
+  return true;
 });
+console.log(isAdult);
 
-isAdult();
+//array.prototype.every() // is everyone 19?
+
+const allAdults = people.every(
+  (person) => new Date().getFullYear() - person.year > 18
+);
+console.log(allAdults);
