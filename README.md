@@ -13,3 +13,5 @@
 6# Day. Ajax Type Ahead // https://ajax-type-ahead-page.netlify.app/
 <br>
 7# Day. Array Cardio Day 2 // https://array-cardio-day-2.netlify.app/
+<br>
+8# Day. Fun with HTML Canvas // https://funny-canvas-drawing.netlify.app/
