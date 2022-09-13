@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>14 Dev Tools</title>
+    <title>Must Know DEVTOOLS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,14 +20,84 @@
       <h2>Day 9. 14 Must Know Dev Tools Tricks</h2>
     </div>
 
-    <div class="canvas" id="appear">
-      <canvas id="canv" , width="500," height="200"></canvas>
+    <div id="appear">
+      <div onClick="makeGreen()" class="make-green">
+        <p>xMAKExGREENx</p>
+      </div>
+      <div class="canvas">
+        <canvas id="canv" , width="500," height="200"></canvas>
+      </div>
     </div>
+    <script>
+      function makeGreen() {
+        const getStyle = document.querySelector(".make-green");
+        getStyle.style.backgroundColor = "#0f0";
+        getStyle.style.color = "#fff";
+        getStyle.style.fontSize = "3em";
+      }
 
-    <!-- THIS CODE IS NOT MINE -->
-    <script type="module" src="./js/canvas.js"></script>
-    <!--  -->
+      const dogs = [
+        { name: "Snikers", age: 2 },
+        { name: "Hugo", age: 8 },
+      ];
+
+      // regular
+      console.log("hello");
+
+      // interpolated
+      console.log("hello i am a %s string!", "poop");
+
+      //styled
+      console.log(
+        "%c I am some great text",
+        "font-size:50px; background:green; text-shadow: 10px 10px 0 blue"
+      );
+
+      //warning
+      console.warn("OH NOOOO");
+
+      //error :/
+      console.error("shit!");
+
+      //info !
+      console.info("crocodiles eat 3-4 people per year");
+
+      //testing
+      const p = document.querySelector("p");
+      console.assert(p.classList.contains("ouch"), "That is wrong!");
+
+      //clearing
+
+      console.clear();
+
+      //grouping together
+      dogs.forEach((dog) => {
+        console.group(`${dog.name}`);
+        console.log(`this is ${dog.name}`);
+        console.log(`${dog.name} is ${dog.age} years old`);
+        console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+        console.groupEnd(`${dog.name}`);
+      });
+
+      //count
+      console.count("dog");
+      console.count("hugo");
+      console.count("dog");
+      console.count("dog");
+
+      //timing
+      console.time("fetching data");
+      fetch("https://api.github.com//users/wesbos")
+        .then((data) => data.json())
+        .then((data) => {
+          console.timeEnd("fetching data");
+          console.log(data);
+        });
+
+      console.table(dogs);
+    </script>
     <script type="module" src="./js/disappear.js"></script>
+    <script type="module" src="./js/canvas.js"></script>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>

@@ -1,5 +1,3 @@
-// <!-- THIS CODE IS NOT MINE -->
-
 const canvas = document.getElementById("canv");
 const ctx = canvas.getContext("2d");
 
@@ -28,5 +26,3 @@ function matrix() {
 }
 
 setInterval(matrix, 50);
-
-//
