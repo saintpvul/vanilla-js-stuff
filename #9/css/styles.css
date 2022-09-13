@@ -36,6 +36,13 @@ body {
 
 /* basic settings */
 
+.canvas {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  filter: opacity(50%);
+  z-index: 1;
+}
 /* starting animation */
 
 #disappear {
