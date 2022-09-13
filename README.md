@@ -15,3 +15,5 @@
 7# Day. Array Cardio Day 2 // https://array-cardio-day-2.netlify.app/
 <br>
 8# Day. Fun with HTML Canvas // https://funny-canvas-drawing.netlify.app/
+<br>
+9# Day. 14 Must Know Dev Tools Tricks // https://must-know-devtools.netlify.app/
