@@ -17,3 +17,5 @@
 8# Day. Fun with HTML Canvas // https://funny-canvas-drawing.netlify.app/
 <br>
 9# Day. 14 Must Know Dev Tools Tricks // https://must-know-devtools.netlify.app/
+<br>
+10# Day. Hold Shift to Check Multiple Checkboxes // https://check-checkboxes-with-shift.netlify.app/
