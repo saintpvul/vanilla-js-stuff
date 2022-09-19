@@ -1,6 +1,7 @@
 :root {
   --font-color: #ffffff;
-  --background: #1f1f1f;
+  --background: #2f2f2f;
+  --angle: 0deg;
 }
 
 * {
@@ -21,17 +22,61 @@ body {
   font-size: 20px;
   font-weight: 200;
   color: var(--font-color);
-  background-color: var(--background);
+  background-image: linear-gradient(
+    to left top,
+    #1d1d1d,
+    #232223,
+    #292629,
+    #302b2d,
+    #382f31,
+    #372e2f,
+    #362c2d,
+    #352b2b,
+    #2c2424,
+    #231d1d,
+    #1a1717,
+    #110f0f
+  );
 }
 
 .heading {
   position: absolute;
-  top: 10%;
-  left: 14%;
+  top: 3%;
+  left: 12%;
   z-index: 1;
   color: var(--font-color);
   font-size: 2rem;
   font-family: "Josefin Sans", sans-serif;
   font-weight: 100;
   text-align: center;
+}
+
+.player {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 27%;
+  top: 25%;
+  width: 47%;
+  height: 60vh;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.9);
+  border: 10px solid;
+  background-color: var(--background);
+  border-image: linear-gradient(var(--angle), #54e6e7, #9edfd3, #aac6c6) 1;
+  animation: 2s rotate linear infinite;
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
 }
