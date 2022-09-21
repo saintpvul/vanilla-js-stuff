@@ -19,3 +19,5 @@
 9# Day. 14 Must Know Dev Tools Tricks // https://must-know-devtools.netlify.app/
 <br>
 10# Day. Hold Shift to Check Multiple Checkboxes // https://check-checkboxes-with-shift.netlify.app/
+<br>
+11# Day. Custom HTML5 Video Player // https://custom-video-player-html5.netlify.app/
