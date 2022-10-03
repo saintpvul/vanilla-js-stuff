@@ -21,17 +21,47 @@ body {
   font-size: 20px;
   font-weight: 200;
   color: var(--font-color);
-  background-color: var(--background);
+  background: linear-gradient(
+    -45deg,
+    #2d194e,
+    #782a60,
+    #b94861,
+    #a77ce4,
+    #e87959,
+    #feb656,
+    #833c2d,
+    #4d0c00
+  );
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .heading {
   position: absolute;
-  top: 3%;
+  top: 23%;
   left: 12%;
+  margin: 0 auto;
   z-index: 1;
   color: var(--font-color);
   font-size: 2rem;
   font-family: "Josefin Sans", sans-serif;
   font-weight: 100;
   text-align: center;
+}
+
+.main-heading {
+  padding-bottom: 2%;
 }
