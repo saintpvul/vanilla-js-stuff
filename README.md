@@ -21,3 +21,5 @@
 10# Day. Hold Shift to Check Multiple Checkboxes // https://check-checkboxes-with-shift.netlify.app/
 <br>
 11# Day. Custom HTML5 Video Player // https://custom-video-player-html5.netlify.app/
+<br>
+12# Day. Key Sequence Detection // https://key-sequence-by-keyword.netlify.app/
