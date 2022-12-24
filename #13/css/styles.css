@@ -1,6 +1,16 @@
 :root {
   --font-color: #ffffff;
-  --background: #000000;
+  --b-background: #000000;
+  --main-bg-color: #c5cbe3;
+  --main-sec-color: #4056a1;
+}
+
+html {
+  margin: 0;
+  box-sizing: border-box;
+  background: var(--main-bg-color);
+  font-size: 20px;
+  font-weight: 200;
 }
 
 * {
@@ -19,19 +29,35 @@ body {
   font-size: 20px;
   font-weight: 200;
   color: var(--font-color);
-  background-color: var(--background);
+}
+
+p {
+  margin-bottom: 3%;
 }
 
 .heading {
-  position: absolute;
-  top: 30%;
-  left: 11%;
+  position: fixed;
+  display: flex;
+  flex-direction: column;
   z-index: 1;
   color: var(--font-color);
   font-size: 2rem;
   font-family: "Josefin Sans", sans-serif;
   font-weight: 100;
   text-align: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+}
+
+.main-heading {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.main-heading h1 {
+  margin-bottom: 5%;
 }
 
 /* starting animation */
@@ -40,6 +66,10 @@ body {
   animation-name: disappear;
   animation-duration: 4s;
   transition: ease-in-out;
+  background: var(--b-background);
+  width: 100%;
+  height: 100%;
+  margin: 0;
 }
 
 @keyframes disappear {
@@ -73,3 +103,41 @@ body {
 }
 
 /*  */
+
+.main-section {
+  max-width: 700px;
+  margin: auto;
+  background: var(--main-sec-color);
+  padding: 40px;
+  text-align: justify;
+}
+
+.align-left {
+  float: left;
+  margin-right: 20px;
+}
+
+.align-right {
+  float: right;
+  margin-left: 20px;
+}
+
+.slide-in {
+  width: 40%;
+  height: fit-content;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.align-left.slide-in {
+  transform: translateX(-30%) scale(0.95);
+}
+
+.align-right.slide-in {
+  transform: translateX(30%) scale(0.95);
+}
+
+.slide-in.active {
+  opacity: 1;
+  transform: translateX(0%) scale(1);
+}
