@@ -35,6 +35,28 @@ p {
   margin-bottom: 3%;
 }
 
+.bg-img {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.bg1 {
+  width: 40%;
+  height: fit-content;
+  left: -17%;
+  top: 30%;
+  transform: rotate(260deg);
+}
+
+.bg2 {
+  width: 40%;
+  transform: rotate(110deg);
+  height: fit-content;
+  right: -20%;
+  top: 30%;
+}
+
 .heading {
   position: fixed;
   display: flex;
@@ -49,7 +71,6 @@ p {
   align-content: center;
   text-align: center;
 }
-
 .main-heading {
   display: flex;
   flex-direction: column;
@@ -105,11 +126,14 @@ p {
 /*  */
 
 .main-section {
-  max-width: 700px;
-  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 20%;
+  max-width: 60%;
   background: var(--main-sec-color);
-  padding: 40px;
+  padding: 0 20px;
   text-align: justify;
+  overflow: hidden;
 }
 
 .align-left {
@@ -123,7 +147,7 @@ p {
 }
 
 .slide-in {
-  width: 40%;
+  width: 45%;
   height: fit-content;
   opacity: 0;
   transition: all 0.5s;
