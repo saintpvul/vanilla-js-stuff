@@ -23,3 +23,5 @@
 11# Day. Custom HTML5 Video Player // https://custom-video-player-html5.netlify.app/
 <br>
 12# Day. Key Sequence Detection // https://key-sequence-by-keyword.netlify.app/
+<br>
+13# Day. Slide In On Scroll // https://slide-in-on-pagescroll.netlify.app/
