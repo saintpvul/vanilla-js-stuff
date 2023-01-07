@@ -25,3 +25,5 @@
 12# Day. Key Sequence Detection // https://key-sequence-by-keyword.netlify.app/
 <br>
 13# Day. Slide In On Scroll // https://slide-in-on-pagescroll.netlify.app/
+<br>
+14# Day. Obj & arr. COPY vs REFERENCE. (must know practice) // https://must-know-copy-practice.netlify.app
