@@ -26,4 +26,4 @@
 <br>
 13# Day. Slide In On Scroll // https://slide-in-on-pagescroll.netlify.app/
 <br>
-14# Day. Obj & arr. COPY vs REFERENCE. (must know practice) // https://must-know-copy-practice.netlify.app
+14# Day. Obj & arr. COPY vs REFERENCE. (must know practice) // [link](https://must-know-copy-practice.netlify.app){:target="\_blank"}
