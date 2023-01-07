@@ -19,6 +19,8 @@
       <h2>Day 14. Object and Arrays - Reference VS Copy</h2>
     </div>
 
+    <div class="desc"><p>browse code</p></div>
+
     <div class="bg">
       <div>
         <div class="wave"></div>
@@ -43,13 +45,47 @@
         flex-direction: column;
         margin: auto;
         color: #ffffff;
-        font-size: 2rem;
+        font-size: 4vh;
         font-family: "Josefin Sans", sans-serif;
         font-weight: 100;
         align-items: center;
       }
+
       .heading h1 {
         margin-bottom: 2%;
+      }
+
+      .desc {
+        position: absolute;
+        top: 60%;
+        left: 60%;
+        font-size: 3vh;
+        color: rgb(211, 255, 211);
+        animation: blink 7s ease infinite;
+      }
+
+      @keyframes blink {
+        0% {
+          filter: opacity(0);
+        }
+        15% {
+          filter: opacity(33%);
+        }
+        30% {
+          filter: opacity(16.5%);
+        }
+        45% {
+          filter: opacity(66%);
+        }
+        60% {
+          filter: opacity(16.5%);
+        }
+        75% {
+          filter: opacity(33%);
+        }
+        100% {
+          filter: opacity(0);
+        }
       }
 
       /* waves */
@@ -129,5 +165,6 @@
         }
       }
     </style>
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
