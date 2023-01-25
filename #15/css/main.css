@@ -1,0 +1,77 @@
+:root {
+  --font-color: #ffffff;
+  --background: #000000;
+}
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "Amatic SC", cursive;
+  font-size: 20px;
+  font-weight: 200;
+  color: var(--font-color);
+  background-color: var(--background);
+}
+
+.heading {
+  position: absolute;
+  top: 30%;
+  left: 11%;
+  z-index: 1;
+  color: var(--font-color);
+  font-size: 2rem;
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 100;
+  text-align: center;
+}
+
+/* basic settings */
+
+/* starting animation */
+
+#disappear {
+  animation-name: disappear;
+  animation-duration: 4s;
+  transition: ease-in-out;
+}
+
+@keyframes disappear {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+#appear {
+  animation-name: appear;
+  animation-duration: 6s;
+  transition: ease-in-out;
+}
+
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*  */
