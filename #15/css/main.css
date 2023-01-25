@@ -1,6 +1,7 @@
 :root {
   --font-color: #ffffff;
   --background: #000000;
+  --light-bg: #e9e9e9;
 }
 
 * {
@@ -15,7 +16,9 @@
 }
 
 body {
-  font-family: "Amatic SC", cursive;
+  width: 100%;
+  height: 100%;
+  font-family: "Poiret One", cursive;
   font-size: 20px;
   font-weight: 200;
   color: var(--font-color);
@@ -26,7 +29,6 @@ body {
   position: absolute;
   top: 30%;
   left: 11%;
-  z-index: 1;
   color: var(--font-color);
   font-size: 2rem;
   font-family: "Josefin Sans", sans-serif;
@@ -75,3 +77,74 @@ body {
 }
 
 /*  */
+
+.main-container {
+  width: 100%;
+  height: 100%;
+}
+.bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  filter: blur(5px) saturate(10%);
+  overflow: hidden;
+}
+.main-bg-img {
+  width: 100%;
+  height: 150%;
+  position: absolute;
+  top: -31%;
+}
+.bg:nth-child(2) {
+  width: 70%;
+  height: 150%;
+  border-radius: 50%;
+  position: absolute;
+  top: -60%;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 5px var(--light-bg);
+  filter: none;
+  overflow: hidden;
+}
+.bg-img {
+  width: 155%;
+  height: 100%;
+  position: absolute;
+  top: 20%;
+  left: -28%;
+}
+
+/* bg animation */
+
+#invert-out {
+  animation-name: invert-out;
+  animation-duration: 0.7s;
+  transition: ease-in;
+}
+
+@keyframes invert-out {
+  0% {
+    filter: blur(5px) saturate(10%);
+  }
+  100% {
+    filter: none;
+  }
+}
+
+#invert-in {
+  animation-name: invert-in;
+  animation-duration: 0.7s;
+  transition: ease-in;
+}
+
+@keyframes invert-in {
+  0% {
+    filter: none;
+  }
+  100% {
+    filter: blur(5px) saturate(10%);
+  }
+}
+
+/* */
