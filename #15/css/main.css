@@ -23,6 +23,7 @@ body {
   font-weight: 200;
   color: var(--font-color);
   background-color: var(--background);
+  overflow: hidden;
 }
 
 .heading {
@@ -86,7 +87,6 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  filter: blur(5px) saturate(10%);
   overflow: hidden;
 }
 .main-bg-img {
@@ -104,7 +104,6 @@ body {
   left: 50%;
   transform: translateX(-50%);
   box-shadow: 0 0 0 5px var(--light-bg);
-  filter: none;
   overflow: hidden;
 }
 .bg-img {
@@ -115,36 +114,56 @@ body {
   left: -28%;
 }
 
+.page-logo {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  width: 17%;
+  height: 34%;
+  transition: all 1s ease-in-out;
+}
+.page-logo > img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
 /* bg animation */
 
-#invert-out {
-  animation-name: invert-out;
-  animation-duration: 0.7s;
-  transition: ease-in;
+.invert-out {
+  filter: blur(5px) saturate(20%) brightness(40%);
+  transition: all 0.5s ease;
 }
 
-@keyframes invert-out {
-  0% {
-    filter: blur(5px) saturate(10%);
-  }
-  100% {
-    filter: none;
-  }
-}
-
-#invert-in {
-  animation-name: invert-in;
-  animation-duration: 0.7s;
-  transition: ease-in;
-}
-
-@keyframes invert-in {
-  0% {
-    filter: none;
-  }
-  100% {
-    filter: blur(5px) saturate(10%);
-  }
+.invert-in {
+  filter: none;
+  transition: all 0.5s ease;
 }
 
 /* */
+
+/* logo invert */
+.invert-logo {
+  width: 10%;
+  height: 20%;
+  filter: contrast(0%) brightness(1000%);
+  animation: all 1s smooth;
+}
+
+/* */
+
+.form-container {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%);
+  width: 20%;
+  height: 30%;
+  background: #000000;
+  transition: all 1.2s ease;
+}
+
+.selected {
+  top: 25%;
+  height: 50%;
+}
