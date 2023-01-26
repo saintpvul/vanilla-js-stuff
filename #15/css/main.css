@@ -120,6 +120,7 @@ body {
   transform: translate(-50%);
   width: 17%;
   height: 34%;
+  filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.5));
   transition: all 1s ease-in-out;
 }
 .page-logo > img {
@@ -154,7 +155,7 @@ body {
 
 .form-container {
   position: absolute;
-  top: 30%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%);
   width: 20%;
@@ -164,6 +165,6 @@ body {
 }
 
 .selected {
-  top: 25%;
+  top: 30%;
   height: 50%;
 }
