@@ -8,9 +8,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200&family=Poiret+One&display=toggle"
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;400&family=Poiret+One&display=swap"
       rel="stylesheet"
     />
+
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="icon" href="./assets/icon.png" />
   </head>
@@ -37,7 +38,17 @@
         onmouseover="toggle()"
         onmouseout="toggleBack()"
         id="toggler"
-      ></div>
+      >
+        <h2 class="form-heading">LOCAL TAPAS</h2>
+        <p></p>
+        <ul class="plates" style="font-weight: 400; text-align: left">
+          <li>Loading Tapas...</li>
+        </ul>
+        <form class="add-items">
+          <input type="text" name="item" placeholder="Item Name" required />
+          <input type="submit" value="+ Add Item" />
+        </form>
+      </div>
     </div>
 
     <script type="module" src="./js/disappear.js"></script>
