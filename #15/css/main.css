@@ -165,6 +165,7 @@ body {
 /* */
 
 .form-container {
+  cursor: default;
   position: absolute;
   top: 35%;
   left: 50%;
@@ -235,6 +236,14 @@ body {
   padding: 4%;
   outline: 0;
   border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.enter {
+  cursor: text;
+}
+
+.pointer {
+  cursor: pointer;
 }
 
 .selected {
