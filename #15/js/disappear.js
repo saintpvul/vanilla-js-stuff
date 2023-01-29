@@ -7,4 +7,4 @@ function disappear() {
   head.parentNode.removeChild(head);
 }
 
-setInterval(disappear, 4000);
+setTimeout(disappear, 4000);

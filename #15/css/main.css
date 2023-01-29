@@ -158,7 +158,8 @@ body {
 .invert-logo {
   width: 10%;
   height: 20%;
-  filter: contrast(0%) brightness(1000%);
+  filter: contrast(0%) brightness(1000%)
+    drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.5));
   animation: all 1s smooth;
 }
 
@@ -229,6 +230,8 @@ body {
   position: sticky;
   justify-content: flex-end;
   margin-top: 20px;
+  display: flex;
+  flex-direction: row;
 }
 
 .add-items input {
@@ -240,10 +243,12 @@ body {
 
 .enter {
   cursor: text;
+  width: 60%;
 }
 
 .pointer {
   cursor: pointer;
+  width: 20%;
 }
 
 .selected {
