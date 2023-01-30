@@ -1,6 +1,11 @@
 const addItems = document.querySelector(".add-items"),
   itemsList = document.querySelector(".plates"),
-  items = [];
+  items = JSON.parse(localStorage.getItem("items")) || [];
+
+if (itemsList) {
+  document.getElementById("logo-toggle").classList.add("invert-logo");
+  document.getElementById("toggler").classList.add("selected");
+}
 
 function addItem(e) {
   e.preventDefault();
@@ -35,4 +40,16 @@ function populateList(plates = [], platesList) {
     .join("");
 }
 
+function toggleDone(e) {
+  if (!e.target.matches("input")) return;
+  const el = e.target,
+    idx = el.dataset.index;
+  items[idx].done = !items[idx].done;
+  localStorage.setItem("items", JSON.stringify(items));
+  populateList(items, itemsList);
+}
+
 addItems.addEventListener("submit", addItem);
+itemsList.addEventListener("click", toggleDone);
+
+populateList(items, itemsList);
