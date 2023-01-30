@@ -1,7 +1,7 @@
 :root {
-  --font-color: #ffffff;
-  --bg: #000000;
-  --light-bg: #e9e9e9;
+  --font-color: #dcdcdc;
+  --bg: #131313;
+  --light-bg: #d5d5d5;
 }
 
 * {
@@ -218,7 +218,7 @@ body {
 }
 
 .plates input + label:before {
-  content: "⬜️";
+  /* content: "⬜️"; */
   margin-right: 10px;
 }
 
@@ -253,7 +253,7 @@ body {
 
 .selected {
   top: 25%;
-  height: 50%;
+  height: 70%;
   transition: all 1s ease-in-out;
-  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.5);
 }
