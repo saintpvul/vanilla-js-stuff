@@ -207,6 +207,7 @@ body {
   padding: 10px 0;
   font-weight: 100;
   display: flex;
+  flex-direction: row;
 }
 .plates label {
   flex: 1;
@@ -241,9 +242,15 @@ body {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.add-items button {
+  font-size: 1.5rem;
+  outline: 0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .enter {
   cursor: text;
-  width: 60%;
+  width: 70%;
 }
 
 .pointer {
@@ -251,9 +258,24 @@ body {
   width: 20%;
 }
 
+.close-button {
+  display: none;
+  width: 10%;
+}
+
 .selected {
   top: 25%;
   height: 70%;
   transition: all 1s ease-in-out;
   box-shadow: 0 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.close {
+  position: absolute;
+  right: 2%;
+  line-height: 30px;
+}
+
+.close:hover {
+  cursor: pointer;
 }

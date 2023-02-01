@@ -27,3 +27,5 @@
 13# Day. <a href="https://slide-in-on-pagescroll.netlify.app/" target="_blank">Slide In On Scroll</a>
 <br>
 14# Day. <a href="https://must-know-copy-practice.netlify.app" target="_blank">Object and array. copy vs ref. (must know practice)</a>
+<br>
+15# Day. <a href="https://must-know-copy-practice.netlify.app" target="_blank">LocalStorage and Event Delegation</a>

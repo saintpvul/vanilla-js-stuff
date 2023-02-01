@@ -1,6 +1,7 @@
 const addItems = document.querySelector(".add-items"),
-  itemsList = document.querySelector(".plates"),
-  items = JSON.parse(localStorage.getItem("items")) || [];
+  clear = document.querySelector(".close-button"),
+  itemsList = document.querySelector(".plates");
+let items = JSON.parse(localStorage.getItem("items") || []);
 
 if (itemsList) {
   document.getElementById("logo-toggle").classList.add("invert-logo");
@@ -15,7 +16,7 @@ function addItem(e) {
     done: false,
   };
 
-  if (items.length < 7) {
+  if (items.length < 6) {
     items.push(item);
   } else {
     alert("There is too much tapas, don't you think so?");
@@ -33,7 +34,9 @@ function populateList(plates = [], platesList) {
 				<input type="checkbox" data-index=${i} id="item${i}" ${
         plate.done ? "checked" : ""
       } />
-				<label for="item${i}">${plate.text}</label>
+				<label for="item${i}">${
+        plate.text
+      }</label><span id='close${i}' class="close">x</span>
 			</li>
 		`
     )
@@ -49,7 +52,20 @@ function toggleDone(e) {
   populateList(items, itemsList);
 }
 
+function clearList(l) {
+  items = [];
+  populateList(items, itemsList);
+  l.preventDefault();
+}
+
+if (items.length > 1) {
+  document.querySelector(".close-button").style.display = "block";
+} else {
+  document.querySelector(".close-button").style.display = "none";
+}
+
 addItems.addEventListener("submit", addItem);
 itemsList.addEventListener("click", toggleDone);
+clear.addEventListener("click", clearList);
 
 populateList(items, itemsList);
