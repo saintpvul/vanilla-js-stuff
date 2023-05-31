@@ -1,4 +1,4 @@
-# Vanilla js projects to update js skills and improve understanding
+# Vanilla js practices to update js skills and improve understanding
 
 1# Day.<a href="https://keyboard-drum-kit-ex.netlify.app" target="_blank"> Keyboard Drum Kit</a>
 <br>
