@@ -29,3 +29,5 @@
 14# Day. <a href="https://must-know-copy-practice.netlify.app" target="_blank">Object and array. copy vs ref. (must know practice)</a>
 <br>
 15# Day. <a href="https://must-know-copy-practice.netlify.app" target="_blank">LocalStorage and Event Delegation</a>
+<br>
+31# Day. <a href="https://todo-simplest.netlify.app" target="_blank">To Do App</a> 
