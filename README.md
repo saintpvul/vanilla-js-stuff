@@ -1,4 +1,4 @@
-# 30days vanilla js challenge to update js skills and improve understanding
+# Vanilla js practices to update js skills and improve understanding
 
 1# Day.<a href="https://keyboard-drum-kit-ex.netlify.app" target="_blank"> Keyboard Drum Kit</a>
 <br>
@@ -29,3 +29,5 @@
 14# Day. <a href="https://must-know-copy-practice.netlify.app" target="_blank">Object and array. copy vs ref. (must know practice)</a>
 <br>
 15# Day. <a href="https://must-know-copy-practice.netlify.app" target="_blank">LocalStorage and Event Delegation</a>
+<br>
+31# Day. <a href="https://todo-simplest.netlify.app" target="_blank">To Do App</a> 
