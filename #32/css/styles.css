@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
+.container1 {
+  width: 100%;
+  height: 100vh;
+  background-image: url(../assets/images/bg-1.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: table;
+}
+
+.container2 {
+  width: 100%;
+  height: 100vh;
+  background-image: url(../assets/images/bg-2.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: table;
+}
+
+.container3 {
+  width: 100%;
+  height: 100vh;
+  background-image: url(../assets/images/bg-3.jpg);
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: table;
+}
+
+h1 {
+  font-size: 5rem;
+  color: white;
+  font-weight: 600;
+  font-family: "Teko", sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  z-index: 1;
+}

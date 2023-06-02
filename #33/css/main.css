@@ -1,0 +1,92 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-image: linear-gradient(
+    to right bottom,
+    #845ec2,
+    #a583d1,
+    #c4a8e0,
+    #e0d0ef,
+    #fcf8ff
+  );
+  overflow: hidden;
+}
+
+.bg-figure {
+  background: #ffe6e0;
+  position: absolute;
+  top: 9%;
+  left: -18%;
+  transform: rotate(-10deg);
+  width: 80%;
+  height: 80%;
+  overflow: hidden;
+  filter: opacity(60%);
+  border-radius: 50%;
+  -webkit-box-shadow: 10px 0px 30px -10px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 10px 0px 30px -10px rgba(0, 0, 0, 0.5);
+  box-shadow: 10px 0px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.floating-figure {
+  animation-name: floating-figure;
+  animation-duration: 17s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.86, 0.54, 0.37, 0.89);
+}
+
+@keyframes floating-figure {
+  0% {
+    transform: rotate(-10deg);
+  }
+  50% {
+    transform: rotate(-13deg);
+    transform: scale(1.1);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+.logo-wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
+
+.main-logo {
+  position: absolute;
+  width: 35%;
+  height: fit-content;
+  left: 58%;
+  top: 10%;
+  transform: rotate(7deg);
+  -webkit-filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(10px 10px 20px rgba(0, 0, 0, 0.5));
+}
+
+.floating-img {
+  animation-name: floating-img;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0.4, 0.8, 0.4, 0.87);
+}
+
+@keyframes floating-img {
+  0% {
+    transform: rotate(7deg);
+  }
+  50% {
+    transform: scale(0.9);
+    transform: rotate(-1deg);
+    left: 53%;
+  }
+  100% {
+    transform: rotate(7deg);
+  }
+}

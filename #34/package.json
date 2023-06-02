@@ -1,0 +1,36 @@
+{
+    "name": "travel-landing-page",
+    "version": "1.0.0",
+    "description": "Travel landing with API Intl practice",
+    "main": "main.js",
+    "scripts": {
+        "test": "mocha"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/saintpvul/stuff-made-here/travel-landing-page.git"
+    },
+    "keywords": [
+        "[",
+        "'travel'",
+        "'landing'",
+        "'i18l'",
+        "'internationalization'",
+        "'api-intl']"
+    ],
+    "author": "saintpvul",
+    "license": "UNLICENSED",
+    "bugs": {
+        "url": "https://github.com/saintpvul/stuff-made-here/travel-landing-page/issues"
+    },
+    "homepage": "https://github.com/saintpvul/stuff-made-here/travel-landing-page#readme",
+    "dependencies": {
+        "intl": "^1.2.5",
+        "intl-locales-supported": "^1.8.12"
+    },
+    "devDependencies": {
+        "html-webpack-plugin": "^5.5.0",
+        "webpack": "^5.79.0",
+        "webpack-cli": "^5.0.1"
+    }
+}
