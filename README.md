@@ -30,4 +30,6 @@
 <br>
 15# Day. <a href="https://must-know-copy-practice.netlify.app" target="_blank">LocalStorage and Event Delegation</a>
 <br>
-31# Day. <a href="https://todo-simplest.netlify.app" target="_blank">To Do App</a> 
+31# Day. <a href="https://todo-simplest.netlify.app" target="_blank">To Do App</a>
+<br>
+32# Day. <a href="https://parallax-page-proj.netlify.app" target="_blank">Parallax WebPage</a>
