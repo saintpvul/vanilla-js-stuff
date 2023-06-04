@@ -4,6 +4,107 @@
     --hue-correct: 145;
 }
 
+.bg {
+    position: absolute;
+    top: 8%;
+    opacity: 0.8;
+    width: 55vw;
+    height: 55vh;
+    z-index: -1;
+}
+
+.bg::before {
+    content: "";
+    opacity: 0.8;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(./image/bg.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+}
+
+.bg::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 100%;
+    background: radial-gradient(transparent, rgba(255, 255, 255, 0.6));
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: sunbeams 4s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.4),
+        0 0 80px rgba(255, 255, 255, 0.2);
+    z-index: -2;
+}
+
+@keyframes sunbeams {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.4),
+            0 0 80px rgba(255, 255, 255, 0.2);
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.01);
+        opacity: 0.8;
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 60px rgba(255, 255, 255, 0.6), 0 0 80px rgba(255, 255, 255, 0.4),
+            0 0 100px rgba(255, 255, 255, 0.2);
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+            0 0 40px rgba(255, 255, 255, 0.6), 0 0 60px rgba(255, 255, 255, 0.4),
+            0 0 80px rgba(255, 255, 255, 0.2);
+    }
+}
+
+.dynamic-text {
+    position: inherit;
+    color: white;
+    font-size: 4em;
+    letter-spacing: 0.5dvh;
+    top: 28%;
+    left: 15%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.dynamic-text span {
+    position: relative;
+}
+
+.dynamic-text span::after {
+    content: "|";
+    position: absolute;
+    opacity: 0;
+    animation: blink 0.7s infinite step-start;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
 body {
     --hue: var(--hue-neutral);
     width: 100vw;
@@ -13,5 +114,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsl(var(--hue), 65%, 15%);
+    background-color: hsl(var(--hue), 55%, 15%);
+    font-family: "Press Start 2P", cursive;
+    overflow: hidden;
+}
+
+body.correct {
+    --hue: var(var(--hue-correct));
 }
