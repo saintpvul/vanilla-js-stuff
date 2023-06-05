@@ -33,7 +33,6 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     width: 50%;
     height: 100%;
     background: radial-gradient(transparent, rgba(255, 255, 255, 0.6));
@@ -68,40 +67,71 @@
     }
 }
 
-.dynamic-text {
-    position: inherit;
-    color: white;
-    font-size: 4em;
-    letter-spacing: 0.5dvh;
-    top: 28%;
-    left: 15%;
-    white-space: nowrap;
+/* play btn */
+
+.play-btn {
+    cursor: pointer;
+    position: absolute;
+    width: 27.7vw;
+    height: 55vh;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f00;
+    position: relative;
     overflow: hidden;
 }
 
-.dynamic-text span {
-    position: relative;
+.play-btn::before,
+.play-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-.dynamic-text span::after {
-    content: "|";
+.play-btn::before {
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-left: 25px solid #fff;
+}
+
+.play-btn::after {
+    width: 8px;
+    height: 8px;
+    background-color: #fff;
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+/*  */
+
+.dynamic-text {
     position: absolute;
-    opacity: 0;
-    animation: blink 0.7s infinite step-start;
+    left: 22.5%;
+    top: 40%;
+    width: 63%;
+    height: 26%;
+    font-size: 2.8em;
+    color: white;
+    letter-spacing: 1dvh;
+}
+
+.blinking {
+    animation: blink 0.5s infinite;
 }
 
 @keyframes blink {
+    0%,
     50% {
         opacity: 1;
     }
-}
-
-@keyframes typing {
-    0% {
-        width: 0;
-    }
+    51%,
     100% {
-        width: 100%;
+        opacity: 0;
     }
 }
 

@@ -1,19 +1,33 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//     const textContainer = document.querySelector(".dynamic-text");
-//     const typingIndicator = textContainer.querySelector("span::after");
-//     const text = "Developer";
-//     let index = 0;
+document.addEventListener("DOMContentLoaded", function () {
+    const text = "Front-End Developer";
+    const dynamicTextElement = document.querySelector(".dynamic-text");
+    const playButton = document.getElementById("play-button");
 
-//     function typeLetter() {
-//         if (index < text.length) {
-//             const letter = document.createElement("span");
-//             letter.textContent = text[index];
-//             textContainer.insertBefore(letter, typingIndicator);
-//             index++;
-//         } else {
-//             clearInterval(typingInterval);
-//         }
-//     }
+    const audio = new Audio("./assets/sound/typing.mp3");
 
-//     const typingInterval = setInterval(typeLetter, 150);
-// });
+    let currentIndex = 0;
+    let interval;
+
+    function addLetter() {
+        dynamicTextElement.textContent = text.slice(0, currentIndex) + "|";
+        currentIndex++;
+
+        if (currentIndex > text.length) {
+            dynamicTextElement.textContent = text.slice(0, text.length);
+            clearInterval(interval);
+            dynamicTextElement.innerHTML += "<span>|</span>";
+            interval = setInterval(blinkText, 500);
+        }
+    }
+
+    function blinkText() {
+        const spanElement = dynamicTextElement.querySelector("span");
+        spanElement.classList.toggle("blinking");
+    }
+    playButton.addEventListener("click", function () {
+        setTimeout(function () {
+            audio.play();
+            interval = setInterval(addLetter, 150);
+        }, 300);
+    });
+});
