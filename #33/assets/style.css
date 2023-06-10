@@ -72,12 +72,12 @@
 .play-btn {
     cursor: pointer;
     position: absolute;
-    width: 27.7vw;
-    height: 55vh;
-    width: 50px;
-    height: 50px;
+    width: 28vw;
+    height: 56vh;
     border-radius: 50%;
-    background-color: #f00;
+    background-color: hsl(var(--hue), 55%, 15%);
+    left: 9.4%;
+    top: -14.5%;
     position: relative;
     overflow: hidden;
 }
@@ -86,7 +86,7 @@
 .play-btn::after {
     content: "";
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -94,17 +94,16 @@
 .play-btn::before {
     width: 0;
     height: 0;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    border-left: 25px solid #fff;
+    border-top: 45px solid transparent;
+    border-bottom: 45px solid transparent;
+    border-left: 75px solid #fff;
 }
 
 .play-btn::after {
-    width: 8px;
-    height: 8px;
-    background-color: #fff;
-    border-radius: 50%;
-    transform: translateX(-50%);
+    content: "PLAY";
+    color: #fff;
+    font-size: 3em;
+    top: 70%;
 }
 
 /*  */
@@ -151,4 +150,9 @@ body {
 
 body.correct {
     --hue: var(var(--hue-correct));
+}
+
+.hide {
+    opacity: 0;
+    transition: opacity 0.3s;
 }

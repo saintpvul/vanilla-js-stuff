@@ -25,6 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
         spanElement.classList.toggle("blinking");
     }
     playButton.addEventListener("click", function () {
+        playButton.classList.add("hide");
+        playButton.addEventListener(
+            "transitionend",
+            function () {
+                playButton.remove();
+            },
+            { once: true }
+        );
         setTimeout(function () {
             audio.play();
             interval = setInterval(addLetter, 150);
