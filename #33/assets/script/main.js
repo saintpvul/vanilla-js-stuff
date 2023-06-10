@@ -1,41 +1,56 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const text = "Front-End Developer";
-    const dynamicTextElement = document.querySelector(".dynamic-text");
-    const playButton = document.getElementById("play-button");
+    //main fn
 
-    const audio = new Audio("./assets/sound/typing.mp3");
+    function typeWriterEffect(element, text) {
+        let currentIndex = 0;
+        let interval;
 
-    let currentIndex = 0;
-    let interval;
+        function typeLetter() {
+            element.textContent = text.slice(0, currentIndex) + "|";
+            currentIndex++;
 
-    function addLetter() {
-        dynamicTextElement.textContent = text.slice(0, currentIndex) + "|";
-        currentIndex++;
+            if (currentIndex > text.length) {
+                element.textContent = text.slice(0, text.length);
+                clearInterval(interval);
+                toggleBlinking(element);
+            }
+        }
 
-        if (currentIndex > text.length) {
-            dynamicTextElement.textContent = text.slice(0, text.length);
-            clearInterval(interval);
-            dynamicTextElement.innerHTML += "<span>|</span>";
-            interval = setInterval(blinkText, 500);
+        interval = setInterval(typeLetter, 150);
+    }
+
+    function toggleBlinking(elem) {
+        const spanContent = "<span class='blinking'>|</span>";
+        const spanElement = elem.querySelector("span.blinking");
+
+        if (spanElement) {
+            spanElement.remove();
+        } else {
+            elem.insertAdjacentHTML("beforeend", spanContent);
         }
     }
 
-    function blinkText() {
-        const spanElement = dynamicTextElement.querySelector("span");
-        spanElement.classList.toggle("blinking");
-    }
-    playButton.addEventListener("click", function () {
-        playButton.classList.add("hide");
-        playButton.addEventListener(
+    //intro
+
+    const INTRO_TEXT = "Front-End Developer";
+    const INTRO_ELEMENT = document.querySelector(".intro-txt");
+    const INTRO_PLAY_BUTTON = document.getElementById("intro-button");
+
+    const INTRO_AUDIO = new Audio("./assets/sound/typing.mp3");
+
+    INTRO_PLAY_BUTTON.addEventListener("click", function () {
+        INTRO_PLAY_BUTTON.classList.add("hide");
+        INTRO_PLAY_BUTTON.addEventListener(
             "transitionend",
             function () {
-                playButton.remove();
+                INTRO_PLAY_BUTTON.remove();
             },
             { once: true }
         );
         setTimeout(function () {
-            audio.play();
-            interval = setInterval(addLetter, 150);
+            INTRO_AUDIO.play();
+            typeWriterEffect(INTRO_ELEMENT, INTRO_TEXT);
         }, 300);
     });
+    // start game
 });

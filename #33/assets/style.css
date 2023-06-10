@@ -4,12 +4,35 @@
     --hue-correct: 145;
 }
 
+body {
+    --hue: var(--hue-neutral);
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: hsl(var(--hue), 55%, 15%);
+    font-family: "Press Start 2P", cursive;
+    overflow: hidden;
+}
+
+body.correct {
+    --hue: var(--hue-correct);
+}
+
+.hide {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
 .bg {
     position: absolute;
     top: 8%;
     opacity: 0.8;
-    width: 55vw;
-    height: 55vh;
+    width: 55%;
+    height: 55%;
     z-index: -1;
 }
 
@@ -67,23 +90,23 @@
     }
 }
 
-/* play btn */
+/* intro play btn */
 
-.play-btn {
+.intro-btn {
     cursor: pointer;
     position: absolute;
-    width: 28vw;
-    height: 56vh;
+    width: 27.7%;
+    height: 55%;
     border-radius: 50%;
     background-color: hsl(var(--hue), 55%, 15%);
-    left: 9.4%;
-    top: -14.5%;
-    position: relative;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
     overflow: hidden;
 }
 
-.play-btn::before,
-.play-btn::after {
+.intro-btn::before,
+.intro-btn::after {
     content: "";
     position: absolute;
     top: 40%;
@@ -91,36 +114,34 @@
     transform: translate(-50%, -50%);
 }
 
-.play-btn::before {
+.intro-btn::before {
     width: 0;
     height: 0;
-    border-top: 45px solid transparent;
-    border-bottom: 45px solid transparent;
-    border-left: 75px solid #fff;
+    border-top: 3.5vw solid transparent;
+    border-bottom: 3.5vw solid transparent;
+    border-left: 6.5vw solid #fff;
 }
 
-.play-btn::after {
+.intro-btn::after {
     content: "PLAY";
     color: #fff;
-    font-size: 3em;
+    font-size: 3vw;
     top: 70%;
 }
 
-/*  */
-
-.dynamic-text {
+.intro-txt {
     position: absolute;
     left: 22.5%;
     top: 40%;
-    width: 63%;
+    width: 67%;
     height: 26%;
-    font-size: 2.8em;
+    font-size: 2.8vw;
     color: white;
-    letter-spacing: 1dvh;
+    letter-spacing: 0.7vw;
 }
 
 .blinking {
-    animation: blink 0.5s infinite;
+    animation: blink 1s infinite;
 }
 
 @keyframes blink {
@@ -134,25 +155,16 @@
     }
 }
 
-body {
-    --hue: var(--hue-neutral);
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: hsl(var(--hue), 55%, 15%);
-    font-family: "Press Start 2P", cursive;
-    overflow: hidden;
-}
+/*  */
 
-body.correct {
-    --hue: var(var(--hue-correct));
-}
-
-.hide {
-    opacity: 0;
-    transition: opacity 0.3s;
+/* start the game btn */
+.start-btn {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 35vw;
+    height: 15vh;
+    background-color: #f00;
+    clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
 }
