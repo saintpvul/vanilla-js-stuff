@@ -14,9 +14,11 @@
         />
     </head>
     <body>
-        <div id="intro-button" class="intro-btn"></div>
-        <div class="bg">
-            <div class="intro-txt"></div>
+        <div id="bg-container" class="bg-container">
+            <div id="intro-button" class="intro-btn"></div>
+            <div class="bg-logo">
+                <div class="intro-txt"></div>
+            </div>
         </div>
         <div class="container">
             <div class="controls">
@@ -28,7 +30,9 @@
                         <button class="btn">Answer</button>
                     </div>
                 </div>
-                <button id="start-button" class="start-btn btn">Start</button>
+                <button id="start-button" class="outer start-btn btn hide">
+                    <div class="inner">Start</div>
+                </button>
             </div>
         </div>
         <div class="score">

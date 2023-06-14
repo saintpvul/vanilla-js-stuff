@@ -1,11 +1,10 @@
-:root {
-    --hue-neutral: 300;
-    --hue-wrong: 0;
-    --hue-correct: 145;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Press Start 2P", cursive;
 }
 
-body {
-    --hue: var(--hue-neutral);
+.bg-container {
     width: 100vw;
     height: 100vh;
     margin: 0;
@@ -13,32 +12,37 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: hsl(var(--hue), 55%, 15%);
-    font-family: "Press Start 2P", cursive;
+    background: rgb(4, 37, 112);
+    background: linear-gradient(
+        90deg,
+        rgba(4, 37, 112, 1) 0%,
+        rgb(122, 1, 141) 100%
+    );
     overflow: hidden;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
 }
 
-body.correct {
-    --hue: var(--hue-correct);
+#bg-container {
+    transition: all 0.5s;
 }
 
-.hide {
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.bg {
+.bg-logo {
     position: absolute;
     top: 8%;
-    opacity: 0.8;
+    left: 50%;
+    transform: translate(-50%);
+    opacity: 0.9;
     width: 55%;
     height: 55%;
     z-index: -1;
 }
 
-.bg::before {
+.bg-logo::before {
     content: "";
-    opacity: 0.8;
+    opacity: 0.9;
     position: absolute;
     top: 0;
     left: 0;
@@ -51,7 +55,7 @@ body.correct {
     z-index: -1;
 }
 
-.bg::after {
+.bg-logo::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -90,6 +94,11 @@ body.correct {
     }
 }
 
+.hide {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
 /* intro play btn */
 
 .intro-btn {
@@ -98,7 +107,7 @@ body.correct {
     width: 27.7%;
     height: 55%;
     border-radius: 50%;
-    background-color: hsl(var(--hue), 55%, 15%);
+    background: #113285;
     top: 8%;
     left: 50%;
     transform: translateX(-50%);
@@ -115,8 +124,6 @@ body.correct {
 }
 
 .intro-btn::before {
-    width: 0;
-    height: 0;
     border-top: 3.5vw solid transparent;
     border-bottom: 3.5vw solid transparent;
     border-left: 6.5vw solid #fff;
@@ -157,14 +164,50 @@ body.correct {
 
 /*  */
 
-/* start the game btn */
-.start-btn {
+/* figures shape */
+
+.outer {
     position: absolute;
+    background-color: lightblue;
     top: 75%;
     left: 50%;
     transform: translateX(-50%);
     width: 35vw;
     height: 15vh;
-    background-color: #f00;
     clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
+    cursor: pointer;
+}
+
+.inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 98%;
+    height: 94%;
+    background: #113285;
+    background: -webkit-linear-gradient(to top, #113285, #281b62);
+    background: linear-gradient(to top, #113285, #281b62);
+    clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3.5em;
+    color: white;
+}
+
+.outer:active .inner {
+    background: rgb(180, 117, 0);
+}
+
+#start-button {
+    display: none;
+}
+
+.choice .inner {
+    background: rgb(255, 166, 0);
+}
+
+.correct .inner {
+    background: rgb(0, 165, 0);
 }
