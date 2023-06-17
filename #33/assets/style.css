@@ -166,20 +166,54 @@
 
 /* figures shape */
 
-.outer {
+.controls {
+    width: 100vw;
+    height: 100vh;
+}
+
+#question-container {
+    display: none;
+    transition: all ease 3.5s;
+    cursor: default;
+}
+
+.question {
     position: absolute;
-    background-color: lightblue;
-    top: 75%;
+    width: 75vw;
+    height: 20vh;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
-    width: 35vw;
-    height: 15vh;
+}
+
+#answer-buttons {
+    display: none;
+}
+
+.btn-grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 76vw;
+    height: 25vh;
+}
+
+.btn-grid > .btn {
+    width: 37vw;
+    height: 10vh;
+}
+
+.outer {
+    background-color: lightblue;
     clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 0 50%);
     cursor: pointer;
 }
 
 .inner {
-    position: absolute;
+    position: relative;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -196,7 +230,7 @@
     color: white;
 }
 
-.outer:active .inner {
+.btn:active .inner {
     background: rgb(180, 117, 0);
 }
 
@@ -210,4 +244,21 @@
 
 .correct .inner {
     background: rgb(0, 165, 0);
+}
+
+.btn {
+    width: 35vw;
+    height: 15vh;
+}
+
+.btn > .inner {
+    position: relative;
+    top: 47%;
+}
+
+.start-btn {
+    position: relative;
+    top: 77%;
+    left: 50%;
+    transform: translateX(-50%);
 }

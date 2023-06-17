@@ -33,6 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const BG_CONTAINER = document.getElementById("bg-container");
 
+    const QUESTION_FIELD = document.getElementById("question-container");
+
+    const ANSWER_BUTTONS_FIELD = document.getElementById("answer-buttons");
+
+    const START_GAME_BUTTON = document.getElementById("start-button");
+
     //intro
     const INTRO_TEXT = "Front-End Developer";
     const INTRO_ELEMENT = document.querySelector(".intro-txt");
@@ -41,9 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
     //audio
     const TYPING_AUDIO = new Audio("./assets/sound/typing.mp3");
     const START_GAME_AUDIO = new Audio("./assets/sound/start-sound.mp3");
-
-    //controls
-    const START_GAME_BUTTON = document.getElementById("start-button");
 
     //intro's mechanics
     INTRO_PLAY_BUTTON.addEventListener("click", () => {
@@ -65,12 +68,16 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 3500);
     });
 
+    let animationStarted = false;
     // start game's mechanics
     START_GAME_BUTTON.addEventListener("click", () => {
         START_GAME_AUDIO.play();
-        setInterval(() => {
-            START_GAME_BUTTON.classList.toggle("choice");
-        }, 500);
+        if (!animationStarted) {
+            animationStarted = true;
+            setInterval(() => {
+                START_GAME_BUTTON.classList.toggle("choice");
+            }, 500);
+        }
         setTimeout(() => {
             START_GAME_BUTTON.classList.toggle("hide");
             START_GAME_BUTTON.addEventListener(
@@ -80,7 +87,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 { once: true }
             );
-            BG_CONTAINER.style.filter = "brightness(75%)";
+            BG_CONTAINER.style.filter = "brightness(45%)";
+            animationStarted = false;
+            QUESTION_FIELD.style.display = "block";
+            ANSWER_BUTTONS_FIELD.style.display = "grid";
         }, 5000);
         clearInterval();
         setTimeout(() => {
@@ -89,3 +99,14 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleBlinking(INTRO_ELEMENT);
     });
 });
+
+/* need to add question animation : 
+| >>> question 1 | >>> quest| >>> | >>> QUESTION....
+
+then answers appear and first answer goes with :
+| >>> ANSWER_1 |
+next one turns the blinked divider
+| >>> ANSWER_2 |
+....
+AND DON'T FORGET THE SOUNDS
+*/
