@@ -1,3 +1,10 @@
+import {
+    level1Questions,
+    level2Questions,
+    level3Questions,
+    level4Questions,
+} from "./questions.js";
+
 document.addEventListener("DOMContentLoaded", function () {
     //main fn
     function typeWriterEffect(element, text) {
