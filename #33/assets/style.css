@@ -3,6 +3,9 @@
     padding: 0;
     font-family: "Press Start 2P", cursive;
 }
+body {
+    overflow: hidden;
+}
 
 .bg-container {
     width: 100vw;
@@ -166,44 +169,26 @@
 
 /* figures shape */
 
-.controls {
-    width: 100vw;
-    height: 100vh;
-}
-
-#question-container {
+#start-button {
     display: none;
-    transition: all ease 3.5s;
-    cursor: default;
 }
 
-.question {
+.start-btn {
     position: absolute;
-    width: 75vw;
-    height: 20vh;
-    top: 15%;
+    top: 77%;
     left: 50%;
     transform: translateX(-50%);
 }
 
-#answer-buttons {
+#next-button {
     display: none;
 }
 
-.btn-grid {
+.next-btn {
     position: absolute;
-    top: 50%;
+    top: 77%;
     left: 50%;
     transform: translateX(-50%);
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    width: 76vw;
-    height: 25vh;
-}
-
-.btn-grid > .btn {
-    width: 37vw;
-    height: 10vh;
 }
 
 .outer {
@@ -233,11 +218,6 @@
 .btn:active .inner {
     background: rgb(180, 117, 0);
 }
-
-#start-button {
-    display: none;
-}
-
 .choice .inner {
     background: rgb(255, 166, 0);
 }
@@ -256,9 +236,49 @@
     top: 47%;
 }
 
-.start-btn {
-    position: relative;
-    top: 77%;
+.controls {
+    width: 100vw;
+    height: 100vh;
+}
+
+#question-container {
+    display: none;
+    /* change display property*/
+    transition: all ease 3.5s;
+    cursor: default;
+    font-size: 6px;
+}
+
+.question {
+    position: absolute;
+    width: 75vw;
+    height: 20vh;
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
+}
+
+.question-text {
+    width: 70%;
+    height: 90%;
+}
+
+#answer-buttons .answer-div {
+    display: none;
+}
+
+.btn-grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    width: 76vw;
+    height: 25vh;
+}
+
+.btn-grid > .btn {
+    width: 37vw;
+    height: 10vh;
 }
