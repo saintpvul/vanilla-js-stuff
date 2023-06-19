@@ -182,25 +182,25 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // !! this functions dont work as expected
 
-    // function typeCurrentQuestion(delay) {
-    //     const currentQuestion = questionByCurrentLevel();
-    //     const answers = currentQuestion.answers;
-    //     const questionText = currentQuestion.text;
-    //     const number = questionNumber(countQuestions);
+    function typeCurrentQuestion(delay) {
+        const currentQuestion = questionByCurrentLevel();
+        const answers = currentQuestion.answers;
+        const questionText = currentQuestion.text;
+        const number = questionNumber(countQuestions);
 
-    //     setTimeout(() => {
-    //         nextQuestionAudio();
-    //         typeWriterEffect(QUESTION, number);
+        setTimeout(() => {
+            nextQuestionAudio();
+            typeWriterEffect(QUESTION, number);
 
-    //         setTimeout(() => {
-    //             deleteTyping(QUESTION, number);
-    //             setTimeout(() => {
-    //                 typeWriterEffect(QUESTION, questionText);
-    //                 showAnswerDivs(answers);
-    //             }, number.length * 150 + 1000);
-    //         }, number.length * 150 + 1000);
-    //     }, delay);
-    // }
+            setTimeout(() => {
+                deleteTyping(QUESTION, number);
+                setTimeout(() => {
+                    typeWriterEffect(QUESTION, questionText);
+                    showAnswerDivs(answers);
+                }, number.length * 150 + 1000);
+            }, number.length * 150 + 1000);
+        }, delay);
+    }
 
     // function showAnswerDivs(answers) {
     //     const answerDivs = document.querySelectorAll(
