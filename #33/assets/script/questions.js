@@ -196,7 +196,7 @@ const level1Questions = [
         text: "How do you write 'Hello World' in an alert box?",
         answers: [
             ["echo('Hello World');", false],
-            ["pring('Hello World');", false],
+            ["print('Hello World');", false],
             ["alert('Hello World');", true],
             ["msg('Hello World');", false],
         ],

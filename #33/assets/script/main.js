@@ -101,13 +101,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const START_GAME_AUDIO = new Audio("./assets/sound/start-sound.mp3");
     const NEXT_QUESTION_AUDIO = new Audio("./assets/sound/next-qst.mp3");
 
+    // level sounds
+    const LEVEL_ONE_AUDIO = new Audio("./assets/sound/qst-1-5.mp3");
+    const LEVEL_TWO_AUDIO = new Audio("./assets/sound/qst-6-10.mp3");
+    const LEVEL_THREE_AUDIO = new Audio("./assets/sound/qst-11-15.mp3");
+    const LEVEL_FOUR_AUDIO = new Audio("./assets/sound/qst-16-20.mp3");
+    //
+
     const nextQuestionAudio = () => setTimeout(NEXT_QUESTION_AUDIO.play(), 250);
 
     function setGlobalVolume(volume) {
         let vol = volume / 10;
-        TYPING_AUDIO.volume = vol;
-        START_GAME_AUDIO.volume = vol;
+        TYPING_AUDIO.volume = vol * 0.5;
+        START_GAME_AUDIO.volume = vol * 0.3;
         NEXT_QUESTION_AUDIO.volume = vol;
+        LEVEL_ONE_AUDIO.volume = vol;
+        LEVEL_TWO_AUDIO.volume = vol;
+        LEVEL_THREE_AUDIO.volume = vol;
+        LEVEL_FOUR_AUDIO.volume = vol;
     }
 
     setGlobalVolume(0.2);
@@ -157,6 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 "transitionend",
                 () => {
                     START_GAME_BUTTON.remove();
+                    animationStarted = false;
                 },
                 { once: true }
             );
@@ -164,7 +176,7 @@ document.addEventListener("DOMContentLoaded", function () {
             animationStarted = false;
             setTimeout(() => {
                 QUESTION_FIELD.style.display = "block";
-                typeCurrentQuestion(250);
+                game();
             }, 250);
             //every mechanics starts next interface block
         }, 5000);
@@ -175,51 +187,121 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleBlinking(INTRO_ELEMENT);
     });
 
-    // global question valiables
+    // question counter variable
 
     let countQuestions = 1;
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    // !! this functions dont work as expected
+    // global game function
 
-    function typeCurrentQuestion(delay) {
+    function game() {
         const currentQuestion = questionByCurrentLevel();
-        const answers = currentQuestion.answers;
+        const currentAnswers = currentQuestion.answers;
         const questionText = currentQuestion.text;
         const number = questionNumber(countQuestions);
+        const answerButtons = document.querySelectorAll(".answer-btn");
+        const nextButton = document.getElementById("next-button");
+        const delay = 250;
 
-        setTimeout(() => {
-            nextQuestionAudio();
-            typeWriterEffect(QUESTION, number);
+        typeCurrentQuestion(delay);
 
+        function typeCurrentQuestion(delay) {
             setTimeout(() => {
-                deleteTyping(QUESTION, number);
-                setTimeout(() => {
-                    typeWriterEffect(QUESTION, questionText);
-                    showAnswerDivs(answers);
-                }, number.length * 150 + 1000);
-            }, number.length * 150 + 1000);
-        }, delay);
-    }
+                nextQuestionAudio();
+                typeWriterEffect(QUESTION, number);
 
-    // function showAnswerDivs(answers) {
-    //     const answerDivs = document.querySelectorAll(
-    //         "#answer-buttons .answer-div"
-    //     );
-    //     setTimeout(() => {
-    //         answerDivs.forEach((div, index) => {
-    //             div.style.display = "block";
-    //             div.classList.remove("hide");
-    //             typeWriterEffect(div, answers[index]);
-    //         });
-    //     }, 300);
-    // }
+                setTimeout(() => {
+                    deleteTyping(QUESTION, number);
+                    setTimeout(() => {
+                        typeWriterEffect(QUESTION, questionText);
+
+                        // call the answer typing function after displaying the question
+                        setTimeout(() => {
+                            showAnswers(currentAnswers);
+                            toggleBlinking(QUESTION);
+                        }, questionText.length * 150 + 1000);
+                    }, number.length * 150 + 500);
+                }, number.length * 150 + 1000);
+            }, delay);
+        }
+
+        function showAnswers(answers) {
+            const buttons = document.getElementById("buttons-field");
+            const buttonsContainer = document.getElementById("answer-buttons");
+            const textFields = document.querySelectorAll(".answer-text");
+            buttons.style.display = "block";
+
+            function typeAnswers(index) {
+                if (index >= textFields.length) {
+                    audioByCurrentLevel(countQuestions);
+                    return;
+                }
+
+                const textField = textFields[index];
+                const answerText = answers[index][0];
+
+                setTimeout(() => {
+                    buttonsContainer.children[index].classList.remove("hide");
+                    typeWriterEffect(textField, answerText);
+
+                    setTimeout(() => {
+                        toggleBlinking(textField);
+                        typeAnswers(index + 1);
+                    }, answerText.length * 150 + 1000);
+                }, 300);
+            }
+
+            typeAnswers(0);
+        }
+        const audioByCurrentLevel = (levelRange) => {
+            let currentAudio;
+            if (levelRange < 6) {
+                currentAudio = LEVEL_ONE_AUDIO;
+            } else if (levelRange >= 6 && levelRange < 11) {
+                currentAudio = LEVEL_TWO_AUDIO;
+            } else if (levelRange >= 11 && levelRange < 16) {
+                currentAudio = LEVEL_THREE_AUDIO;
+            } else {
+                currentAudio = LEVEL_FOUR_AUDIO;
+            }
+
+            currentAudio.addEventListener("ended", function () {
+                // Restart the audio when it ends
+                this.currentTime = 0;
+                this.play();
+            });
+            currentAudio.play();
+        };
+
+        answerButtons.forEach((button, index) => {
+            button.addEventListener("click", () => {
+                const isCorrectAnswer = currentAnswers[index][1] === true;
+                const correctButton = currentAnswers.filter((answer, idx) =>
+                    answer[1] === true ? idx : -1
+                );
+
+                if (!animationStarted) {
+                    animationStarted = true;
+                    setInterval(() => {
+                        button.toggle("choice");
+                    }, 500);
+                }
+
+                if (isCorrectAnswer) {
+                    setTimeout(() => {
+                        button.classList.add("correct");
+                    }, 2000);
+                    nextButton.style.display = "block";
+                } else {
+                    console.log("Incorrect answer clicked!");
+                }
+            });
+        });
+    }
 });
 
-/*  answers appear and first answer goes with :
-| >>> ANSWER_1 |
-next one turns the blinked divider
-| >>> ANSWER_2 |
-....
-AND DON'T FORGET THE SOUNDS
+/* NEED SOME CHANGES
+- need to change animation of all buttons. 
+- block responses from buttons when one of they is clicked. 
+- add next button logic.
+- add audio controls. audio is quite annoying.
 */

@@ -18,7 +18,7 @@ body {
     background: rgb(4, 37, 112);
     background: linear-gradient(
         90deg,
-        rgba(4, 37, 112, 1) 0%,
+        rgb(0, 35, 117) 0%,
         rgb(122, 1, 141) 100%
     );
     overflow: hidden;
@@ -51,7 +51,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(./image/bg.png);
+    background-image: url(./images/bg.png);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -226,6 +226,10 @@ body {
     background: rgb(0, 165, 0);
 }
 
+.false .inner {
+    background: rgb(185, 0, 0);
+}
+
 .btn {
     width: 35vw;
     height: 15vh;
@@ -235,6 +239,8 @@ body {
     position: relative;
     top: 47%;
 }
+
+/* question controls container */
 
 .controls {
     width: 100vw;
@@ -259,17 +265,23 @@ body {
 }
 
 .question-text {
+    margin-top: 1%;
     width: 70%;
     height: 90%;
 }
 
-#answer-buttons .answer-div {
-    /* display: none; */
+.btn-field {
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 30vh;
 }
 
 .btn-grid {
     position: absolute;
-    top: 50%;
     left: 50%;
     transform: translateX(-50%);
     grid-template-columns: repeat(2, 1fr);
@@ -280,5 +292,18 @@ body {
 
 .btn-grid > .btn {
     width: 37vw;
-    height: 10vh;
+    height: 15vh;
+}
+
+#buttons-field {
+    display: none;
+}
+
+.answer-text {
+    position: absolute;
+    width: 70%;
+    height: 90%;
+    text-align: left;
+    font-size: 0.9rem;
+    margin-top: 1%;
 }
