@@ -264,7 +264,7 @@ body {
 }
 
 #answer-buttons .answer-div {
-    display: none;
+    /* display: none; */
 }
 
 .btn-grid {
