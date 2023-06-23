@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const perc = (val / range) * 100;
 
-        volumeSlider.style.backgroundImage = `linear-gradient(to right, #888 ${perc}%, #ddd 0%)`;
+        volumeSlider.style.backgroundImage = `linear-gradient(to right, rgb(0, 35, 117) ${perc}%, #ddd 0%)`;
     };
 
     volumeSlider.addEventListener("input", function () {
