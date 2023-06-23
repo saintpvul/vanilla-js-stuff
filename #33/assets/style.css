@@ -96,6 +96,101 @@ body {
             0 0 80px rgba(255, 255, 255, 0.2);
     }
 }
+/* audio settings */
+.audio-controls {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    justify-items: center;
+    align-items: center;
+    width: 1.5vw;
+    height: 15vh;
+    right: 2%;
+    top: 1%;
+}
+
+@media (max-width: 768px) {
+    .mute,
+    .volume {
+        box-shadow: rgb(38, 57, 77) 0 3px 5px -1px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mute,
+    .volume {
+        box-shadow: none;
+    }
+}
+.mute {
+    width: 1.4em;
+    height: 1.5em;
+    cursor: pointer;
+    background-color: #ddd;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mute-icon {
+    margin-left: 7px;
+    display: block;
+    background-color: black;
+    width: 0.5em;
+    height: 0.5em;
+    &:after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-color: transparent transparent transparent black;
+        border-width: 10px 7px 10px 7px;
+        top: 2px;
+        left: 10px;
+    }
+    &:before {
+        content: "";
+        position: absolute;
+        top: 5px;
+        left: -2px;
+        transform: rotate(-130deg);
+        border-radius: 0 50px 0 0;
+        width: 7px;
+        height: 7px;
+        border-color: black;
+        border-width: 7px 7px 0 0;
+        border-style: double;
+        transition: all 0.2s ease;
+    }
+}
+
+.muted {
+    margin-left: 0;
+    transition: all 0.2s ease;
+    &:after {
+        content: "";
+        left: 7px;
+    }
+}
+
+.volume {
+    -webkit-appearance: none;
+    box-shadow: 0 0 7px 1px rgba(60, 60, 60, 0.4);
+    background-image: linear-gradient(to right, #888 30%, #ddd 0%);
+    height: 1.6em;
+    width: 4em;
+    transform: rotate(270deg);
+}
+
+.volume::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: transparent;
+    width: 0.1px;
+    height: 0.1px;
+}
 
 .hide {
     opacity: 0;

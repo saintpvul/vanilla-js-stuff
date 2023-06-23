@@ -385,7 +385,6 @@ const level2Questions = [
         ],
         checked: false,
     },
-    //
     {
         text: "How do you call a function named 'myFunction'?",
         answers: [
@@ -773,7 +772,6 @@ const level4Questions = [
         ],
         checked: false,
     },
-    //
     {
         text: "When creating a Number object, what do passed values that can't be converted return?",
         answers: [

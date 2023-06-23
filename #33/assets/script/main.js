@@ -72,9 +72,9 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (countQuestions > 5 && countQuestions <= 10) {
             currentQuestion = getRandomQuestion(level2Questions);
         } else if (countQuestions > 10 && countQuestions <= 15) {
-            countQuestions = getRandomQuestion(level3Questions);
+            currentQuestion = getRandomQuestion(level3Questions);
         } else if (countQuestions > 15 && countQuestions <= 20) {
-            countQuestions = getRandomQuestion(level4Questions);
+            currentQuestion = getRandomQuestion(level4Questions);
         }
         return currentQuestion;
     }
@@ -108,9 +108,33 @@ document.addEventListener("DOMContentLoaded", function () {
     const LEVEL_FOUR_AUDIO = new Audio("./assets/sound/qst-16-20.mp3");
     //
 
-    const nextQuestionAudio = () => setTimeout(NEXT_QUESTION_AUDIO.play(), 250);
+    const audioElements = [
+        LEVEL_ONE_AUDIO,
+        LEVEL_TWO_AUDIO,
+        LEVEL_THREE_AUDIO,
+        LEVEL_FOUR_AUDIO,
+        TYPING_AUDIO,
+        START_GAME_AUDIO,
+        NEXT_QUESTION_AUDIO,
+    ];
 
-    function setGlobalVolume(volume) {
+    //audio control
+    const AUDIO_CONTROLS = document.getElementById("audio-controls");
+
+    const muteButton = document.querySelector(".mute");
+    const volumeSlider = document.querySelector(".volume");
+
+    function toggleMute() {
+        audioElements.forEach(function (audio) {
+            audio.muted = !audio.muted;
+        });
+    }
+
+    function toggleMuteButtonStyle() {
+        muteButton.classList.toggle("muted");
+    }
+
+    function setVolume(volume) {
         let vol = volume / 10;
         TYPING_AUDIO.volume = vol * 0.5;
         START_GAME_AUDIO.volume = vol * 0.3;
@@ -120,13 +144,33 @@ document.addEventListener("DOMContentLoaded", function () {
         LEVEL_THREE_AUDIO.volume = vol;
         LEVEL_FOUR_AUDIO.volume = vol;
     }
+    const defaultVolume = 0.3;
+    setVolume(defaultVolume);
 
-    setGlobalVolume(0.2);
-    /*
+    volumeSlider.oninput = function () {
+        const min = volumeSlider.getAttribute("min");
+        const max = volumeSlider.getAttribute("max");
 
-    NEED TO ADD VOLUME CONTROLS
+        const range = max - min;
 
-    */
+        const val = volumeSlider.value;
+
+        const perc = (val / range) * 100;
+
+        volumeSlider.style.backgroundImage = `linear-gradient(to right, #888 ${perc}%, #ddd 0%)`;
+    };
+
+    volumeSlider.addEventListener("input", function () {
+        const volume = parseFloat(this.value) / 100;
+        setVolume(volume);
+    });
+
+    muteButton.addEventListener("click", function () {
+        toggleMute();
+        toggleMuteButtonStyle();
+    });
+
+    const nextQuestionAudio = () => setTimeout(NEXT_QUESTION_AUDIO.play(), 250);
 
     //intro's mechanics
     INTRO_PLAY_BUTTON.addEventListener("click", () => {
@@ -140,6 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
             { once: true }
         );
         setTimeout(() => {
+            AUDIO_CONTROLS.style.display = "flex";
             TYPING_AUDIO.play();
             typeWriterEffect(INTRO_ELEMENT, INTRO_TEXT);
         }, 300);
@@ -189,7 +234,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // question counter variable
 
-    let countQuestions = 1;
+    let countQuestions = 11;
 
     // global game function
 
@@ -201,7 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const answerButtons = document.querySelectorAll(".answer-btn");
         const nextButton = document.getElementById("next-button");
         const delay = 250;
-
         typeCurrentQuestion(delay);
 
         function typeCurrentQuestion(delay) {
