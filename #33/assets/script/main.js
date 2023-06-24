@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const perc = (val / range) * 100;
 
-        volumeSlider.style.backgroundImage = `linear-gradient(to right, rgb(0, 35, 117) ${perc}%, #ddd 0%)`;
+        volumeSlider.style.backgroundImage = `linear-gradient(to right, rgb(0, 35, 117) ${perc}%, #ccc 0%)`;
     };
 
     volumeSlider.addEventListener("input", function () {
@@ -234,11 +234,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // question counter variable
 
-    let countQuestions = 11;
+    let countQuestions = 1;
 
     // global game function
-
     function game() {
+        //variables for main function game
+
         const currentQuestion = questionByCurrentLevel();
         const currentAnswers = currentQuestion.answers;
         const questionText = currentQuestion.text;
@@ -247,6 +248,15 @@ document.addEventListener("DOMContentLoaded", function () {
         const nextButton = document.getElementById("next-button");
         const delay = 250;
         typeCurrentQuestion(delay);
+        const correctAnswer = currentAnswers
+            .map((answer, index) => {
+                let value = [answer, index];
+                if (answer[1] === true) {
+                    return value;
+                }
+            })
+            .filter(Boolean)[0];
+        const correctButton = answerButtons[correctAnswer[1]];
 
         function typeCurrentQuestion(delay) {
             setTimeout(() => {
@@ -269,14 +279,20 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         function showAnswers(answers) {
-            const buttons = document.getElementById("buttons-field");
             const buttonsContainer = document.getElementById("answer-buttons");
             const textFields = document.querySelectorAll(".answer-text");
-            buttons.style.display = "block";
+            document.getElementById("buttons-field").style.display = "block";
+
+            answerButtons.forEach((button) => {
+                button.disabled = true;
+            });
 
             function typeAnswers(index) {
                 if (index >= textFields.length) {
                     audioByCurrentLevel(countQuestions);
+                    for (let i = 0; i < answerButtons.length; i++) {
+                        answerButtons[i].disabled = false;
+                    }
                     return;
                 }
 
@@ -316,36 +332,68 @@ document.addEventListener("DOMContentLoaded", function () {
             currentAudio.play();
         };
 
+        function showCorrectAnswer(delay) {
+            setTimeout(() => {
+                correctButton.classList.toggle("correct");
+            }, delay);
+        }
+
+        function toggleNextButton() {
+            if (nextButton.classList.contains("hide")) {
+                nextButton.style.display = "block";
+                nextButton.classList.remove("hide");
+            } else {
+                nextButton.classList.add("hide");
+                nextButton.addEventListener(
+                    "transitionend",
+                    () => {
+                        nextButton.remove();
+                        animationStarted = false;
+                    },
+                    { once: true }
+                );
+            }
+        }
+
+        function responseResult(button, index) {
+            let choice;
+
+            if (!animationStarted) {
+                animationStarted = true;
+                choice = setInterval(() => {
+                    button.classList.toggle("choice");
+                }, 500);
+            }
+
+            answerButtons.forEach((button) => {
+                button.disabled = true;
+            });
+
+            if (index !== correctAnswer[1]) {
+                setTimeout(() => {
+                    button.classList.add("wrong");
+                }, 2000);
+            } else {
+                setTimeout(() => {
+                    clearInterval(choice);
+                    toggleNextButton();
+                    countQuestions++;
+                }, 2000);
+            }
+
+            showCorrectAnswer(2000);
+        }
+
         answerButtons.forEach((button, index) => {
             button.addEventListener("click", () => {
-                const isCorrectAnswer = currentAnswers[index][1] === true;
-                const correctButton = currentAnswers.filter((answer, idx) =>
-                    answer[1] === true ? idx : -1
-                );
-
-                if (!animationStarted) {
-                    animationStarted = true;
-                    setInterval(() => {
-                        button.toggle("choice");
-                    }, 500);
-                }
-
-                if (isCorrectAnswer) {
-                    setTimeout(() => {
-                        button.classList.add("correct");
-                    }, 2000);
-                    nextButton.style.display = "block";
-                } else {
-                    console.log("Incorrect answer clicked!");
-                }
+                responseResult(button, index);
             });
         });
     }
 });
 
-/* NEED SOME CHANGES
-- need to change animation of all buttons. 
-- block responses from buttons when one of they is clicked. 
-- add next button logic.
-- add audio controls. audio is quite annoying.
+/* NEED SOME CHANGES  
+- add next button logic. 
+- add end-game screen with text.
+- add win and loose sounds.
 */

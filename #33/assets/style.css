@@ -124,8 +124,9 @@ body {
     }
 }
 .mute {
-    width: 2em;
-    height: 2em;
+    border: 0.2em lightblue solid;
+    width: 1.8em;
+    height: 1.8em;
     cursor: pointer;
     background-color: rgb(0, 35, 117);
     position: relative;
@@ -137,7 +138,7 @@ body {
     .mute-icon {
         margin-left: 7px;
         display: block;
-        background-color: #ddd;
+        background-color: #ccc;
         width: 0.5em;
         height: 0.5em;
         &:after {
@@ -146,7 +147,7 @@ body {
             width: 0;
             height: 0;
             border-style: solid;
-            border-color: transparent transparent transparent #ddd;
+            border-color: transparent transparent transparent #ccc;
             border-width: 10px 7px 10px 7px;
             top: 50%;
             left: 65%;
@@ -162,7 +163,7 @@ body {
             border-radius: 0 50px 0 0;
             width: 7px;
             height: 7px;
-            border-color: #ddd;
+            border-color: #ccc;
             border-width: 7px 7px 0 0;
             border-style: double;
             transition: all 0.2s ease;
@@ -181,8 +182,9 @@ body {
 .volume {
     -webkit-appearance: none;
     box-shadow: 0 0 7px 1px rgba(60, 60, 60, 0.4);
-    background-image: linear-gradient(to right, rgb(0, 35, 117) 30%, #ddd 0%);
+    background-image: linear-gradient(to right, rgb(0, 35, 117) 30%, #ccc 0%);
     height: 2em;
+    border: 0.2em lightblue solid;
     border-radius: 5em;
     width: 4em;
     transform: rotate(270deg);
@@ -324,7 +326,7 @@ body {
     background: rgb(0, 165, 0);
 }
 
-.false .inner {
+.wrong .inner {
     background: rgb(185, 0, 0);
 }
 
@@ -371,7 +373,7 @@ body {
 .btn-field {
     position: absolute;
     display: block;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translateX(-50%);
     width: 100vw;
@@ -404,4 +406,9 @@ body {
     text-align: left;
     font-size: 0.9rem;
     margin-top: 1%;
+}
+
+.result {
+    width: 100vw;
+    height: 100vh;
 }
