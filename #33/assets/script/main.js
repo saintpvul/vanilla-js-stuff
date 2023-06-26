@@ -7,7 +7,7 @@ import {
 
 document.addEventListener("DOMContentLoaded", function () {
     //main fn
-    function typeWriterEffect(element, text) {
+    function typeWriterEffect(element, text, delay) {
         let currentIndex = 0;
         let interval;
 
@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
 
-        interval = setInterval(typeLetter, 150);
+        interval = setInterval(typeLetter, delay);
     }
 
     function toggleBlinking(elem) {
@@ -91,6 +91,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const START_GAME_BUTTON = document.getElementById("start-button");
 
+    const END_GAME_WINDOW = document.getElementById("game-end-window");
+
+    const RESTART_GAME_BUTTON = document.getElementById("restart-button");
+
     //intro
     const INTRO_TEXT = "Front-End Developer";
     const INTRO_ELEMENT = document.querySelector(".intro-txt");
@@ -123,6 +127,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const muteButton = document.querySelector(".mute");
     const volumeSlider = document.querySelector(".volume");
+
+    function stopAllAudio() {
+        audioElements.forEach((audio) => {
+            audio.pause();
+            audio.currentTime = 0;
+        });
+    }
 
     function toggleMute() {
         audioElements.forEach(function (audio) {
@@ -186,7 +197,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
             AUDIO_CONTROLS.style.display = "flex";
             TYPING_AUDIO.play();
-            typeWriterEffect(INTRO_ELEMENT, INTRO_TEXT);
+            typeWriterEffect(INTRO_ELEMENT, INTRO_TEXT, 150);
         }, 300);
         setTimeout(() => {
             START_GAME_BUTTON.classList.toggle("hide");
@@ -218,7 +229,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 { once: true }
             );
             BG_CONTAINER.style.filter = "brightness(45%)";
-            animationStarted = false;
             setTimeout(() => {
                 QUESTION_FIELD.style.display = "block";
                 game();
@@ -239,15 +249,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // global game function
     function game() {
         //variables for main function game
-
         const currentQuestion = questionByCurrentLevel();
         const currentAnswers = currentQuestion.answers;
         const questionText = currentQuestion.text;
         const number = questionNumber(countQuestions);
+        const buttonsField = document.getElementById("buttons-field");
+        const buttonsContainer = document.getElementById("answer-buttons");
         const answerButtons = document.querySelectorAll(".answer-btn");
         const nextButton = document.getElementById("next-button");
         const delay = 250;
+
         typeCurrentQuestion(delay);
+
         const correctAnswer = currentAnswers
             .map((answer, index) => {
                 let value = [answer, index];
@@ -261,27 +274,26 @@ document.addEventListener("DOMContentLoaded", function () {
         function typeCurrentQuestion(delay) {
             setTimeout(() => {
                 nextQuestionAudio();
-                typeWriterEffect(QUESTION, number);
+                typeWriterEffect(QUESTION, number, 100);
 
                 setTimeout(() => {
-                    deleteTyping(QUESTION, number);
+                    deleteTyping(QUESTION, number, 100);
                     setTimeout(() => {
-                        typeWriterEffect(QUESTION, questionText);
+                        typeWriterEffect(QUESTION, questionText, 50);
 
                         // call the answer typing function after displaying the question
                         setTimeout(() => {
                             showAnswers(currentAnswers);
                             toggleBlinking(QUESTION);
-                        }, questionText.length * 150 + 1000);
-                    }, number.length * 150 + 500);
-                }, number.length * 150 + 1000);
+                        }, questionText.length * 50 + 1000);
+                    }, number.length * 50 + 500);
+                }, number.length * 50 + 1000);
             }, delay);
         }
 
         function showAnswers(answers) {
-            const buttonsContainer = document.getElementById("answer-buttons");
             const textFields = document.querySelectorAll(".answer-text");
-            document.getElementById("buttons-field").style.display = "block";
+            buttonsField.style.display = "block";
 
             answerButtons.forEach((button) => {
                 button.disabled = true;
@@ -301,12 +313,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 setTimeout(() => {
                     buttonsContainer.children[index].classList.remove("hide");
-                    typeWriterEffect(textField, answerText);
+                    typeWriterEffect(textField, answerText, 50);
 
                     setTimeout(() => {
                         toggleBlinking(textField);
                         typeAnswers(index + 1);
-                    }, answerText.length * 150 + 1000);
+                    }, answerText.length * 50 + 1000);
                 }, 300);
             }
 
@@ -369,20 +381,115 @@ document.addEventListener("DOMContentLoaded", function () {
                 button.disabled = true;
             });
 
+            stopAllAudio();
+
+            setTimeout(() => clearInterval(choice), 2000);
+
             if (index !== correctAnswer[1]) {
                 setTimeout(() => {
-                    button.classList.add("wrong");
-                }, 2000);
+                    setTimeout(() => {
+                        if (countQuestions <= 10) {
+                            console.log("looser");
+                        }
+                        button.classList.toggle("wrong");
+                    }, 2000);
+                    endGame();
+                }, 3000);
             } else {
+                // need to add logic to nextButton. it should start a new game() fn
                 setTimeout(() => {
-                    clearInterval(choice);
                     toggleNextButton();
                     countQuestions++;
+                    nextButtonLogic();
                 }, 2000);
             }
 
             showCorrectAnswer(2000);
         }
+
+        function nextButtonLogic() {
+            nextButton.addEventListener("click", () => {
+                if (!animationStarted) {
+                    animationStarted = true;
+                    setInterval(() => {
+                        nextButton.classList.toggle("choice");
+                    }, 500);
+                }
+                setTimeout(() => {
+                    nextButton.classList.toggle("hide");
+                    nextButton.addEventListener(
+                        "transitionend",
+                        () => {
+                            nextButton.remove();
+                            animationStarted = false;
+                        },
+                        { once: true }
+                    );
+                    QUESTION.style.display = "none";
+                    buttonsContainer.style.display = "none";
+                    QUESTION.textContent = "";
+                    answerButtons.forEach(
+                        (button) => (button.textContent = "")
+                    );
+                    game();
+                }, 5000);
+                clearInterval();
+                setTimeout(() => {
+                    nextButton.classList.add("correct");
+                }, 3500);
+            });
+        }
+
+        //end game code
+
+        function endGame() {
+            const endTextContainer = document.getElementById("end-text");
+            stopAllAudio();
+            const endTextByPos = getEndGameText(countQuestions);
+
+            END_GAME_WINDOW.style.display = "block";
+            AUDIO_CONTROLS.style.display = "none";
+            buttonsField.style.display = "none";
+            QUESTION_FIELD.style.display = "none";
+            typeWriterEffect(endTextContainer, endTextByPos, 50);
+            setTimeout(() => {
+                RESTART_GAME_BUTTON.style.display = "block";
+            }, endTextByPos.length * 50 + 1000);
+
+            RESTART_GAME_BUTTON.addEventListener("click", () =>
+                window.location.reload()
+            );
+            /* will works if player would be wrong
+            - remove all controls elements
+            - add end-game-container on the webpage
+            - return endGameText and play END_GAME_AUDIO (needed to find)
+            (endGameText is too large)
+            - add replay button with property : window.location.reload()
+            */
+            // const endGame
+        }
+
+        function getEndGameText(level) {
+            let text;
+            let questionsCountText = `\nYou answered ${countQuestions} question${
+                countQuestions != 1 ? "s." : "."
+            }`;
+            if (level <= 5) {
+                text =
+                    "Ladies and gentlemen, tonight we have a question that proves even in the pursuit of becoming a developer, the role of a TRAINEE Front-End Developer can lead to incredible opportunities.";
+            } else if (level > 5 && level <= 10) {
+                text =
+                    "Step into the spotlight, as we unveil the power of a JUNIOR Front-End Developer - a role that ignites innovation, fuels creativity, and unlocks a world of digital possibilities on the path to developer dreams.";
+            } else if (level > 10 && level <= 15) {
+                text =
+                    "Welcome to the elite league of digital craftsmanship, where the position of a MIDDLE Front-End Developer takes center stage. Armed with expertise and a knack for innovation, they navigate the realms of code, design, and user experience, weaving together captivating interfaces that leave a lasting impression on the path to developer aspirations.";
+            } else {
+                text =
+                    "Prepare to witness the pinnacle of Front-End mastery as we unveil the extraordinary role of a SENIOR Front-End Developer. With unrivaled expertise, strategic vision, and a touch of coding wizardry, they orchestrate digital symphonies, shaping the future of user interfaces and propelling themselves towards the realm of developers.";
+            }
+            return text + questionsCountText;
+        }
+        //
 
         answerButtons.forEach((button, index) => {
             button.addEventListener("click", () => {
@@ -393,7 +500,5 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* NEED SOME CHANGES  
-- add next button logic. 
-- add end-game screen with text.
-- add win and loose sounds.
+- change next button logic.  
 */
