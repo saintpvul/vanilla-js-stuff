@@ -391,7 +391,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         if (countQuestions <= 10) {
                             console.log("looser");
                         }
-                        button.classList.toggle("wrong");
+                        button.classList.add("wrong");
+                        // need to fix this logix
                     }, 2000);
                     endGame();
                 }, 3000);
