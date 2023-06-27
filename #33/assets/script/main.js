@@ -6,6 +6,10 @@ import {
 } from "./questions.js";
 
 document.addEventListener("DOMContentLoaded", function () {
+    // main var question counter
+
+    let countQuestions = 1;
+
     //main fn
     function typeWriterEffect(element, text, delay) {
         let currentIndex = 0;
@@ -52,33 +56,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const interval = setInterval(deleteLetter, delay);
     }
 
-    // functions to get questions
-
-    function questionNumber(counter) {
-        let text = "Question #" + counter;
-        return text;
-    }
-
-    function getRandomQuestion(questionLevel) {
-        let n = questionLevel.length - 1;
-        let questionNumber = Math.floor(Math.random() * n + 1);
-        return questionLevel[questionNumber];
-    }
-
-    function questionByCurrentLevel() {
-        let currentQuestion;
-        if (countQuestions <= 5) {
-            currentQuestion = getRandomQuestion(level1Questions);
-        } else if (countQuestions > 5 && countQuestions <= 10) {
-            currentQuestion = getRandomQuestion(level2Questions);
-        } else if (countQuestions > 10 && countQuestions <= 15) {
-            currentQuestion = getRandomQuestion(level3Questions);
-        } else if (countQuestions > 15 && countQuestions <= 20) {
-            currentQuestion = getRandomQuestion(level4Questions);
-        }
-        return currentQuestion;
-    }
-
     //access
 
     const BG_CONTAINER = document.getElementById("bg-container");
@@ -86,8 +63,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const QUESTION_FIELD = document.getElementById("question-container");
 
     const QUESTION = document.getElementById("question-text");
-
-    const ANSWER_BUTTONS_FIELD = document.getElementById("answer-buttons");
 
     const START_GAME_BUTTON = document.getElementById("start-button");
 
@@ -104,6 +79,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const TYPING_AUDIO = new Audio("./assets/sound/typing.mp3");
     const START_GAME_AUDIO = new Audio("./assets/sound/start-sound.mp3");
     const NEXT_QUESTION_AUDIO = new Audio("./assets/sound/next-qst.mp3");
+    const CORRECT_ANSWER_AUDIO = new Audio("./assets/sound/correct-ans.mp3");
+    const END_GAME_AUDIO = new Audio("./assets/sound/end-game.mp3");
 
     // level sounds
     const LEVEL_ONE_AUDIO = new Audio("./assets/sound/qst-1-5.mp3");
@@ -120,6 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
         TYPING_AUDIO,
         START_GAME_AUDIO,
         NEXT_QUESTION_AUDIO,
+        CORRECT_ANSWER_AUDIO,
+        END_GAME_AUDIO,
     ];
 
     //audio control
@@ -127,6 +106,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const muteButton = document.querySelector(".mute");
     const volumeSlider = document.querySelector(".volume");
+
+    // save audio settings
+
+    // saved and default
+    const savedVolume = localStorage.getItem("volumeSetting");
+    const defaultVolume = savedVolume ? parseFloat(savedVolume) : 0.3;
+
+    // Set the initial volume
+    setVolume(defaultVolume);
+    volumeSlider.value = defaultVolume * 100;
+
+    // Update the volume slider background
+    updateVolumeSliderBackground();
+    function updateVolumeSliderBackground() {
+        const min = volumeSlider.getAttribute("min");
+        const max = volumeSlider.getAttribute("max");
+        const range = max - min;
+        const val = volumeSlider.value;
+        const perc = (val / range) * 100;
+        volumeSlider.style.backgroundImage = `linear-gradient(to right, rgb(0, 35, 117) ${perc}%, #ccc 0%)`;
+    }
 
     function stopAllAudio() {
         audioElements.forEach((audio) => {
@@ -150,38 +150,37 @@ document.addEventListener("DOMContentLoaded", function () {
         TYPING_AUDIO.volume = vol * 0.5;
         START_GAME_AUDIO.volume = vol * 0.3;
         NEXT_QUESTION_AUDIO.volume = vol;
+        CORRECT_ANSWER_AUDIO.volume = vol;
+        END_GAME_AUDIO.volume = vol;
         LEVEL_ONE_AUDIO.volume = vol;
         LEVEL_TWO_AUDIO.volume = vol;
         LEVEL_THREE_AUDIO.volume = vol;
         LEVEL_FOUR_AUDIO.volume = vol;
+        saveVolumeSetting(volume);
     }
-    const defaultVolume = 0.3;
     setVolume(defaultVolume);
 
-    volumeSlider.oninput = function () {
-        const min = volumeSlider.getAttribute("min");
-        const max = volumeSlider.getAttribute("max");
-
-        const range = max - min;
-
-        const val = volumeSlider.value;
-
-        const perc = (val / range) * 100;
-
-        volumeSlider.style.backgroundImage = `linear-gradient(to right, rgb(0, 35, 117) ${perc}%, #ccc 0%)`;
-    };
-
+    function saveVolumeSetting(volume) {
+        localStorage.setItem("volumeSetting", volume);
+    }
     volumeSlider.addEventListener("input", function () {
         const volume = parseFloat(this.value) / 100;
         setVolume(volume);
+        updateVolumeSliderBackground();
     });
 
     muteButton.addEventListener("click", function () {
         toggleMute();
         toggleMuteButtonStyle();
+        const volume = muteButton.classList.contains("muted")
+            ? 0
+            : volumeSlider.value / 100;
+        saveVolumeSetting(volume);
     });
 
     const nextQuestionAudio = () => setTimeout(NEXT_QUESTION_AUDIO.play(), 250);
+
+    //
 
     //intro's mechanics
     INTRO_PLAY_BUTTON.addEventListener("click", () => {
@@ -231,7 +230,7 @@ document.addEventListener("DOMContentLoaded", function () {
             BG_CONTAINER.style.filter = "brightness(45%)";
             setTimeout(() => {
                 QUESTION_FIELD.style.display = "block";
-                game();
+                game(countQuestions);
             }, 250);
             //every mechanics starts next interface block
         }, 5000);
@@ -242,24 +241,57 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleBlinking(INTRO_ELEMENT);
     });
 
-    // question counter variable
-
-    let countQuestions = 1;
-
     // global game function
-    function game() {
+    function game(countCurrentQuestion, delay = 250) {
         //variables for main function game
-        const currentQuestion = questionByCurrentLevel();
-        const currentAnswers = currentQuestion.answers;
-        const questionText = currentQuestion.text;
-        const number = questionNumber(countQuestions);
+        let currentQuestion = questionByCurrentLevel();
+        let currentAnswers = currentQuestion.answers;
+        let questionText = currentQuestion.text;
+        let number = questionNumber(countCurrentQuestion);
         const buttonsField = document.getElementById("buttons-field");
         const buttonsContainer = document.getElementById("answer-buttons");
         const answerButtons = document.querySelectorAll(".answer-btn");
         const nextButton = document.getElementById("next-button");
-        const delay = 250;
+
+        currentQuestion.checked = true;
 
         typeCurrentQuestion(delay);
+
+        // functions to get questions
+
+        function questionNumber(counter) {
+            let text = "Question #" + counter;
+            return text;
+        }
+
+        function getRandomQuestion(questionLevel) {
+            let n = questionLevel.length - 1;
+            let questionNumber = Math.floor(Math.random() * n + 1);
+            if (questionLevel[questionNumber].checked) {
+                return getRandomQuestion(questionLevel);
+            }
+            return questionLevel[questionNumber];
+        }
+
+        function questionByCurrentLevel() {
+            let currentQuestion;
+            if (countCurrentQuestion <= 5) {
+                currentQuestion = getRandomQuestion(level1Questions);
+            } else if (countCurrentQuestion > 5 && countCurrentQuestion <= 10) {
+                currentQuestion = getRandomQuestion(level2Questions);
+            } else if (
+                countCurrentQuestion > 10 &&
+                countCurrentQuestion <= 15
+            ) {
+                currentQuestion = getRandomQuestion(level3Questions);
+            } else if (
+                countCurrentQuestion > 15 &&
+                countCurrentQuestion <= 20
+            ) {
+                currentQuestion = getRandomQuestion(level4Questions);
+            }
+            return currentQuestion;
+        }
 
         const correctAnswer = currentAnswers
             .map((answer, index) => {
@@ -301,10 +333,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             function typeAnswers(index) {
                 if (index >= textFields.length) {
-                    audioByCurrentLevel(countQuestions);
-                    for (let i = 0; i < answerButtons.length; i++) {
-                        answerButtons[i].disabled = false;
-                    }
+                    audioByCurrentLevel(countCurrentQuestion);
+                    answerButtons.forEach(
+                        (button) => (button.disabled = false)
+                    );
                     return;
                 }
 
@@ -323,7 +355,14 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             typeAnswers(0);
+
+            answerButtons.forEach((button, index) => {
+                button.addEventListener("click", () => {
+                    responseResult(button, index);
+                });
+            });
         }
+
         const audioByCurrentLevel = (levelRange) => {
             let currentAudio;
             if (levelRange < 6) {
@@ -356,6 +395,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 nextButton.classList.remove("hide");
             } else {
                 nextButton.classList.add("hide");
+                nextButton.classList.remove("correct");
                 nextButton.addEventListener(
                     "transitionend",
                     () => {
@@ -384,60 +424,68 @@ document.addEventListener("DOMContentLoaded", function () {
             stopAllAudio();
 
             setTimeout(() => clearInterval(choice), 2000);
+            animationStarted = false;
 
             if (index !== correctAnswer[1]) {
                 setTimeout(() => {
-                    setTimeout(() => {
-                        if (countQuestions <= 10) {
-                            console.log("looser");
-                        }
-                        button.classList.add("wrong");
-                        // need to fix this logix
-                    }, 2000);
-                    endGame();
-                }, 3000);
-            } else {
-                // need to add logic to nextButton. it should start a new game() fn
+                    if (countCurrentQuestion <= 10) {
+                        console.log("looser");
+                    }
+                    END_GAME_AUDIO.play();
+                    button.classList.add("wrong");
+                }, 2000);
                 setTimeout(() => {
+                    button.classList.remove("wrong");
+                    showCorrectAnswer();
+                    endGame();
+                }, 3500);
+            } else {
+                stopAllAudio();
+                // should start win audio in here and played once
+                setTimeout(() => {
+                    if (countQuestions + 1 === 21) {
+                        END_GAME_AUDIO.play();
+                        endGame();
+                    }
+                    CORRECT_ANSWER_AUDIO.play();
                     toggleNextButton();
-                    countQuestions++;
-                    nextButtonLogic();
+                    nextButtonLogic(countCurrentQuestion);
                 }, 2000);
             }
 
             showCorrectAnswer(2000);
         }
-
-        function nextButtonLogic() {
+        function nextButtonLogic(question) {
             nextButton.addEventListener("click", () => {
                 if (!animationStarted) {
                     animationStarted = true;
-                    setInterval(() => {
+                    const choiceInterval = setInterval(() => {
                         nextButton.classList.toggle("choice");
                     }, 500);
+                    setTimeout(() => {
+                        clearInterval(choiceInterval);
+                    }, 2000);
                 }
-                setTimeout(() => {
-                    nextButton.classList.toggle("hide");
-                    nextButton.addEventListener(
-                        "transitionend",
-                        () => {
-                            nextButton.remove();
-                            animationStarted = false;
-                        },
-                        { once: true }
-                    );
-                    QUESTION.style.display = "none";
-                    buttonsContainer.style.display = "none";
-                    QUESTION.textContent = "";
-                    answerButtons.forEach(
-                        (button) => (button.textContent = "")
-                    );
-                    game();
-                }, 5000);
-                clearInterval();
+
                 setTimeout(() => {
                     nextButton.classList.add("correct");
-                }, 3500);
+                    setTimeout(() => {
+                        toggleNextButton();
+                        nextButton.addEventListener(
+                            "transitionend",
+                            () => {
+                                QUESTION.style.display = "none";
+                                buttonsContainer.style.display = "none";
+                                QUESTION.textContent = "";
+                                answerButtons.forEach(
+                                    (button) => (button.textContent = "")
+                                );
+                                game(question + 1);
+                            },
+                            { once: true }
+                        );
+                    }, 1000);
+                }, 2000);
             });
         }
 
@@ -445,8 +493,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         function endGame() {
             const endTextContainer = document.getElementById("end-text");
-            stopAllAudio();
-            const endTextByPos = getEndGameText(countQuestions);
+            // need to add end game audio in this place
+            const endTextByPos = getEndGameText(countCurrentQuestion);
 
             END_GAME_WINDOW.style.display = "block";
             AUDIO_CONTROLS.style.display = "none";
@@ -460,46 +508,33 @@ document.addEventListener("DOMContentLoaded", function () {
             RESTART_GAME_BUTTON.addEventListener("click", () =>
                 window.location.reload()
             );
-            /* will works if player would be wrong
-            - remove all controls elements
-            - add end-game-container on the webpage
-            - return endGameText and play END_GAME_AUDIO (needed to find)
-            (endGameText is too large)
-            - add replay button with property : window.location.reload()
-            */
-            // const endGame
         }
 
         function getEndGameText(level) {
             let text;
-            let questionsCountText = `\nYou answered ${countQuestions} question${
-                countQuestions != 1 ? "s." : "."
+            let questionsCountText = `
+            \nYou answered ${countCurrentQuestion - 1} question${
+                countCurrentQuestion != 1 ? "s." : "."
             }`;
             if (level <= 5) {
                 text =
-                    "Ladies and gentlemen, tonight we have a question that proves even in the pursuit of becoming a developer, the role of a TRAINEE Front-End Developer can lead to incredible opportunities.";
+                    "Ladies and gentlemen, tonight\nwe have a question that proves\neven in the pursuit of becoming\n a developer, the role of a\nTRAINEE Front-End Developer can \nlead to incredible \nopportunities.";
             } else if (level > 5 && level <= 10) {
                 text =
-                    "Step into the spotlight, as we unveil the power of a JUNIOR Front-End Developer - a role that ignites innovation, fuels creativity, and unlocks a world of digital possibilities on the path to developer dreams.";
+                    "Step into the spotlight, as \nwe unveil the power of a \nJUNIOR Front-End Developer \n- a role that ignites innovation, \nfuels creativity, and \nunlocks a world of digital \npossibilities on the \npath to developer dreams.";
             } else if (level > 10 && level <= 15) {
                 text =
-                    "Welcome to the elite league of digital craftsmanship, where the position of a MIDDLE Front-End Developer takes center stage. Armed with expertise and a knack for innovation, they navigate the realms of code, design, and user experience, weaving together captivating interfaces that leave a lasting impression on the path to developer aspirations.";
+                    "Welcome to the elite league \nof digital craftsmanship,\nhere the position of a \nMIDDLE Front-End Developer \ntakes center stage. \nArmed with expertise and a knack \nfor innovation, they navigate \nthe realms of code, design, \nand user experience, \nweaving together captivating \ninterfaces that leave a lasting \nimpression on the path to \ndeveloper aspirations.";
             } else {
                 text =
-                    "Prepare to witness the pinnacle of Front-End mastery as we unveil the extraordinary role of a SENIOR Front-End Developer. With unrivaled expertise, strategic vision, and a touch of coding wizardry, they orchestrate digital symphonies, shaping the future of user interfaces and propelling themselves towards the realm of developers.";
+                    "Prepare to witness \nthe pinnacle of Front-End \nmastery as we unveil the \nextraordinary role of a \nSENIOR Front-End Developer.\n With unrivaled expertise, \nstrategic vision, and \na touch of coding wizardry, \nthey orchestrate digital \nsymphonies, shaping the future \nof user interfaces and \npropelling themselves towards \nthe realm of developers.";
             }
             return text + questionsCountText;
         }
         //
-
-        answerButtons.forEach((button, index) => {
-            button.addEventListener("click", () => {
-                responseResult(button, index);
-            });
-        });
     }
 });
 
-/* NEED SOME CHANGES  
-- change next button logic.  
-*/
+/* NEED SOME CHANGES
+    fix game logic after next game click event
+ */
