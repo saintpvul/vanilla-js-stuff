@@ -393,6 +393,7 @@ body {
 .btn-grid > .btn {
     width: 37vw;
     height: 15vh;
+    margin-bottom: 1%;
 }
 
 #buttons-field {
