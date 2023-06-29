@@ -240,8 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let animationStarted = false;
 
     // game starts here
-
-    START_GAME_BUTTON.addEventListener("click", async () => {
+    START_GAME_BUTTON.addEventListener("click", () => {
         START_GAME_AUDIO.play();
         if (!animationStarted) {
             animationStarted = true;
@@ -260,9 +259,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 { once: true }
             );
             BG_CONTAINER.style.filter = "brightness(45%)";
-            setTimeout(async () => {
+            setTimeout(() => {
                 QUESTION_FIELD.style.display = "block";
-                await game(countQuestions);
+                game(countQuestions);
             }, 250);
         }, 5000);
         clearInterval();
@@ -414,7 +413,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
                 CORRECT_ANSWER_AUDIO.play();
                 toggleNextButton();
-                nextButtonLogic(currentLevel);
+                countQuestions++;
+                nextButtonLogic(countQuestions);
             }, 2000);
         }
 
@@ -449,7 +449,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     //  main next button fn
     function nextButtonLogic(questionLevel) {
-        const newQuestionLevel = questionLevel + 1;
         nextButton.addEventListener("click", () => {
             if (!animationStarted) {
                 animationStarted = true;
@@ -474,7 +473,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     answerTextFields.forEach(
                         (textField) => (textField.textContent = "")
                     );
-                    game(newQuestionLevel);
+                    game(questionLevel);
                 }, 1000);
             }, 2000);
         });
@@ -550,6 +549,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // global game function
     function game(currentQuestionCounter, delay = 250) {
         // setting questions by its count to main game variables
+        console.log(currentQuestionCounter);
         const number = countQuestionNumber(currentQuestionCounter);
         const currentQuestion = questionByCurrentLevel(currentQuestionCounter);
         const currentAnswers = currentQuestion.answers;
@@ -583,5 +583,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* NEED SOME CHANGES
-fix a bug with processing the response to the second and subsequent responses
+fix a bug with processing the response to the second and subsequent responses ****** fixed
+need to change next button toggle and answer animation after it was animated
  */
