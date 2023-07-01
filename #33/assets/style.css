@@ -270,7 +270,7 @@ body {
 /* figures shape */
 
 #start-button {
-    display: none;
+    display: block;
 }
 
 .start-btn {
@@ -281,7 +281,7 @@ body {
 }
 
 #next-button {
-    display: none;
+    display: block;
 }
 
 .next-btn {
@@ -349,7 +349,7 @@ body {
 }
 
 #question-container {
-    display: none;
+    display: block;
     /* change display property*/
     transition: all ease 3.5s;
     cursor: default;
@@ -398,7 +398,7 @@ body {
 }
 
 #buttons-field {
-    display: none;
+    display: block;
 }
 
 .answer-text {

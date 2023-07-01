@@ -23,8 +23,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // question controls blocks
 
-    const buttonsField = document.getElementById("buttons-field");
     const answerButtons = document.querySelectorAll(".answer-btn");
+    const buttonsField = document.getElementById("buttons-field");
     const nextButton = document.getElementById("next-button");
     const answerTextFields = document.querySelectorAll(".answer-text");
 
@@ -52,19 +52,66 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // main var question counter
 
-    /*
+    let currentQuestionIndex = 0;
 
+    //
+    // complete refactor
+    function quizGame() {
+        currentQuestionIndex = 0;
+        showQuestion();
+    }
 
+    function showQuestion() {
+        let currentQuestion = getRandomQuestionByCategory(currentQuestionIndex);
+        let questionNumber = currentQuestionIndex + 1;
+        let currentQuestionCountInfo = `Question #${questionNumber}`;
+        let currentQuestionText = currentQuestion.text;
+        QUESTION.style.display = "block";
+        setTimeout(() => {
+            typeWriterEffect(QUESTION, currentQuestionCountInfo, 100);
+            setTimeout(() => {
+                deleteTyping(QUESTION, currentQuestionCountInfo, 100);
+                setTimeout(() => {
+                    typeWriterEffect(QUESTION, currentQuestionText, 50);
 
-    */
+                    setTimeout(() => {
+                        //answer handle
+                        toggleBlinking(QUESTION);
+                    }, currentQuestionText.length * 50 + 1000);
+                }, currentQuestionCountInfo.length * 50 + 1000);
+            }, currentQuestionCountInfo.length * 50 + 1000);
+        }, 0);
+        currentQuestion.answers.forEach((answer) => {
+            const button = document.createElement("button");
+            button.textContent = answer[0];
+            button.classList.add("btn");
+            answerButtons.appendChild(button);
+        });
+    }
 
-    let countQuestions = 1;
+    function getRandomQuestionByCategory() {
+        let currentQuestionCategory;
+        if (currentQuestionIndex < 5) {
+            currentQuestionCategory = level1Questions;
+        } else if (currentQuestionIndex >= 5 && currentQuestionIndex < 10) {
+            currentQuestionCategory = level2Questions;
+        } else if (currentQuestionIndex >= 10 && currentQuestionIndex < 15) {
+            currentQuestionCategory = level3Questions;
+        } else if (currentQuestionIndex >= 15 && currentQuestionIndex < 20) {
+            currentQuestionCategory = level4Questions;
+        }
+        let n = currentQuestionCategory.length;
+        let questionNumber = Math.floor(Math.random() * n);
+        if (currentQuestionCategory[questionNumber].checked) {
+            return getRandomQuestionByCategory();
+        }
+        //turning current question to checked
+        currentQuestionCategory[questionNumber].checked = true;
+        return currentQuestionCategory[questionNumber];
+    }
 
-    /*
+    quizGame();
 
-
-
-    */
     // main animation fn
     function typeWriterEffect(element, text, delay) {
         let currentIndex = 0;
@@ -263,7 +310,7 @@ document.addEventListener("DOMContentLoaded", function () {
             BG_CONTAINER.style.filter = "brightness(45%)";
             setTimeout(() => {
                 QUESTION_FIELD.style.display = "block";
-                game(countQuestions);
+                // game(countQuestions);
             }, 250);
         }, 5000);
         clearInterval();
@@ -274,37 +321,6 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleBlinking(INTRO_ELEMENT);
     });
 
-    // functions for question controls
-
-    // getting question and return questions counter
-
-    function countQuestionNumber(counter) {
-        let text = "Question #" + counter;
-        return text;
-    }
-
-    function questionByCurrentLevel(countCurrentQuestion) {
-        let currentQuestion;
-        if (countCurrentQuestion <= 5) {
-            currentQuestion = getRandomQuestion(level1Questions);
-        } else if (countCurrentQuestion > 5 && countCurrentQuestion <= 10) {
-            currentQuestion = getRandomQuestion(level2Questions);
-        } else if (countCurrentQuestion > 10 && countCurrentQuestion <= 15) {
-            currentQuestion = getRandomQuestion(level3Questions);
-        } else if (countCurrentQuestion > 15 && countCurrentQuestion <= 20) {
-            currentQuestion = getRandomQuestion(level4Questions);
-        }
-        return currentQuestion;
-    }
-
-    function getRandomQuestion(questionLevel) {
-        let n = questionLevel.length;
-        let questionNumber = Math.floor(Math.random() * n);
-        if (questionLevel[questionNumber].checked) {
-            return getRandomQuestion(questionLevel);
-        }
-        return questionLevel[questionNumber];
-    }
     // type question into question filed and start showAnswers animation
     function typeCurrentQuestion(
         delay,
@@ -585,7 +601,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     /* NEED SOME CHANGES
-fix a bug with processing the response to the second and subsequent responses ****** fixed
-need to change next button toggle and answer animation after it was animated
- */
+    fix a bug with processing the response to the second and subsequent responses ****** fixed
+    need to change next button toggle and answer animation after it was animated
+
+    need to delete all buttons and fill the answers field content with buttons dynamically and also dynamiacally delete those
+    */
 });
