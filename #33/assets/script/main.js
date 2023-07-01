@@ -241,10 +241,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // game starts here
     START_GAME_BUTTON.addEventListener("click", () => {
+        let choiceInterval;
         START_GAME_AUDIO.play();
         if (!animationStarted) {
             animationStarted = true;
-            setInterval(() => {
+
+            choiceInterval = setInterval(() => {
                 START_GAME_BUTTON.classList.toggle("choice");
             }, 500);
         }
@@ -266,6 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }, 5000);
         clearInterval();
         setTimeout(() => {
+            clearInterval(choiceInterval);
             START_GAME_BUTTON.classList.add("correct");
         }, 3500);
         toggleBlinking(INTRO_ELEMENT);
@@ -295,8 +298,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function getRandomQuestion(questionLevel) {
-        let n = questionLevel.length - 1;
-        let questionNumber = Math.floor(Math.random() * n + 1);
+        let n = questionLevel.length;
+        let questionNumber = Math.floor(Math.random() * n);
         if (questionLevel[questionNumber].checked) {
             return getRandomQuestion(questionLevel);
         }
@@ -580,9 +583,9 @@ document.addEventListener("DOMContentLoaded", function () {
             currentQuestionCounter
         );
     }
-});
 
-/* NEED SOME CHANGES
+    /* NEED SOME CHANGES
 fix a bug with processing the response to the second and subsequent responses ****** fixed
 need to change next button toggle and answer animation after it was animated
  */
+});

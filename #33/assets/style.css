@@ -318,6 +318,7 @@ body {
 .btn:active .inner {
     background: rgb(180, 117, 0);
 }
+
 .choice .inner {
     background: rgb(255, 166, 0);
 }
