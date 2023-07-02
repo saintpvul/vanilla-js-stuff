@@ -59,12 +59,15 @@ body {
 }
 
 .bg-logo::after {
+    background-color: black;
     content: "";
     position: absolute;
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
-    width: 50%;
+    width: auto;
     height: 100%;
+    aspect-ratio: 1/1;
     background: radial-gradient(transparent, rgba(255, 255, 255, 0.6));
     border-radius: 50%;
     opacity: 0.8;
@@ -74,7 +77,6 @@ body {
         0 0 80px rgba(255, 255, 255, 0.2);
     z-index: -2;
 }
-
 @keyframes sunbeams {
     0% {
         transform: translate(-50%, -50%) scale(1);
@@ -96,6 +98,56 @@ body {
             0 0 80px rgba(255, 255, 255, 0.2);
     }
 }
+
+/* intro play btn */
+
+.intro-btn {
+    cursor: pointer;
+    position: absolute;
+    width: auto;
+    height: 55%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: #113285;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+}
+
+.intro-btn::before,
+.intro-btn::after {
+    content: "";
+    position: absolute;
+    top: 40%;
+    left: 52%;
+    transform: translate(-50%, -50%);
+}
+
+.intro-btn::before {
+    border-top: 3.5vw solid transparent;
+    border-bottom: 3.5vw solid transparent;
+    border-left: 6.5vw solid #ddd;
+}
+
+.intro-btn::after {
+    content: "PLAY";
+    color: #ddd;
+    font-size: 3vw;
+    top: 70%;
+}
+
+.intro-txt {
+    position: absolute;
+    left: 22.5%;
+    top: 40%;
+    width: 67%;
+    height: 26%;
+    font-size: 2.8vw;
+    color: #fff;
+    letter-spacing: 0.7vw;
+}
+
 /* audio settings */
 .audio-controls {
     position: absolute;
@@ -202,54 +254,6 @@ body {
     transition: opacity 0.3s;
 }
 
-/* intro play btn */
-
-.intro-btn {
-    cursor: pointer;
-    position: absolute;
-    width: 27.7%;
-    height: 55%;
-    border-radius: 50%;
-    background: #113285;
-    top: 8%;
-    left: 50%;
-    transform: translateX(-50%);
-    overflow: hidden;
-}
-
-.intro-btn::before,
-.intro-btn::after {
-    content: "";
-    position: absolute;
-    top: 40%;
-    left: 52%;
-    transform: translate(-50%, -50%);
-}
-
-.intro-btn::before {
-    border-top: 3.5vw solid transparent;
-    border-bottom: 3.5vw solid transparent;
-    border-left: 6.5vw solid #ddd;
-}
-
-.intro-btn::after {
-    content: "PLAY";
-    color: #ddd;
-    font-size: 3vw;
-    top: 70%;
-}
-
-.intro-txt {
-    position: absolute;
-    left: 22.5%;
-    top: 40%;
-    width: 67%;
-    height: 26%;
-    font-size: 2.8vw;
-    color: #fff;
-    letter-spacing: 0.7vw;
-}
-
 .blinking {
     animation: blink 1s infinite;
 }
@@ -269,19 +273,8 @@ body {
 
 /* figures shape */
 
-#start-button {
-    display: block;
-}
-
-.start-btn {
-    position: absolute;
-    top: 77%;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 #next-button {
-    display: block;
+    display: none;
 }
 
 .next-btn {
@@ -315,7 +308,7 @@ body {
     color: white;
 }
 
-.btn:active .inner {
+.btn:active:not([disabled]) .inner {
     background: rgb(180, 117, 0);
 }
 
@@ -349,7 +342,7 @@ body {
 }
 
 #question-container {
-    display: block;
+    display: none;
     /* change display property*/
     transition: all ease 3.5s;
     cursor: default;
@@ -373,7 +366,7 @@ body {
 
 .btn-field {
     position: absolute;
-    display: block;
+    display: none;
     top: 40%;
     left: 50%;
     transform: translateX(-50%);
@@ -398,7 +391,7 @@ body {
 }
 
 #buttons-field {
-    display: block;
+    display: none;
 }
 
 .answer-text {
@@ -425,13 +418,13 @@ body {
 .end-game-container {
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 40%;
     transform: translate(-50%, -50%);
     width: 60vw;
     height: 60vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     color: white;
 }
@@ -442,6 +435,38 @@ body {
     font-size: 1.5em;
 }
 
-#restart-button {
-    display: none;
+@media (max-width: 600px) {
+    .intro-btn::before {
+        top: 50%;
+        border-top: 10vw solid transparent;
+        border-bottom: 10vw solid transparent;
+        border-left: 18vw solid #ddd;
+    }
+    .intro-btn::after {
+        content: "";
+    }
+}
+
+@media (max-width: 600px) {
+    .intro-btn::before {
+        top: 50%;
+        border-top: 10vw solid transparent;
+        border-bottom: 10vw solid transparent;
+        border-left: 18vw solid #ddd;
+    }
+    .intro-btn::after {
+        content: "";
+    }
+}
+
+@media (max-height: 300px) {
+    .intro-btn::before {
+        top: 50%;
+        border-top: 10vh solid transparent;
+        border-bottom: 10vh solid transparent;
+        border-left: 18vh solid #ddd;
+    }
+    .intro-btn::after {
+        content: "";
+    }
 }
