@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Concert List</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;700&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="filter"></div>
+            <div class="poster">
+                <h1>This Evening Concert Poster</h1>
+                <p class="date-block">
+                    When:
+                    <span id="date-day"></span>
+                    <span id="date-month"></span>
+                </p>
+                <p class="place-block">
+                    Where:
+                    <span id="place"> Almaty Arena</span>
+                </p>
+                <div class="headliners" id="band-table"></div>
+            </div>
+        </div>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                overflow: hidden;
+            }
+            body {
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 1em;
+                font-family: "Raleway", sans-serif;
+                font-weight: 300;
+            }
+            .main-container {
+                position: absolute;
+                width: 100vw;
+                height: 100vh;
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-image: url(./bg-img.jpeg);
+                filter: brightness(1.5);
+                z-index: -2;
+            }
+            .filter {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(
+                    ellipse at center,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 1) 100%
+                );
+                z-index: -1;
+            }
+            h1 {
+                position: absolute;
+                width: 100%;
+                top: 5%;
+                left: 50%;
+                transform: translateX(-50%);
+                font-size: 4em;
+                text-align: center;
+            }
+            .date-block {
+                font-size: 3em;
+                width: 15%;
+                height: 35%;
+                position: absolute;
+                left: 5%;
+                top: 30%;
+            }
+            #date-day,
+            #date-month,
+            #place {
+                display: block;
+                color: rgba(255, 0, 0, 0.7);
+                font-weight: 700;
+                font-size: 2.5em;
+                margin-bottom: -15px;
+            }
+            #date-month {
+                font-size: 1.4em;
+            }
+            .place-block {
+                font-size: 3em;
+                width: 15%;
+                height: 35%;
+                position: absolute;
+                right: 5%;
+                top: 30%;
+            }
+            #place {
+                margin-top: 15px;
+                font-size: 1.4em;
+            }
+            .headliners {
+                position: absolute;
+                top: 55%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 50%;
+                height: fit-content;
+                background: rgba(0, 0, 0, 0.7);
+                border-radius: 20px;
+                list-style: none;
+                box-shadow: 0px 0px 5px 10px rgba(255, 255, 255, 0.3);
+                -webkit-box-shadow: 0px 0px 5px 10px rgba(255, 255, 255, 0.3);
+                -moz-box-shadow: 0px 0px 5px 10px rgba(255, 255, 255, 0.3);
+            }
+
+            #band-table table {
+                padding: 1%;
+                width: 100%;
+                font-size: 1.4em;
+            }
+
+            #band-table tr td {
+                padding: 1%;
+                border-top: 1px solid rgba(255, 255, 255, 0.6);
+                color: rgba(255, 220, 220, 0.7);
+                font-weight: 700;
+            }
+
+            #band-table tr td:last-child {
+                text-align: center;
+            }
+
+            #band-table th {
+                text-align: center;
+                padding: 1%;
+            }
+        </style>
+        <script>
+            // bands-table
+            const bandTable = document.getElementById("band-table");
+            const bands = [
+                "Still Corners",
+                "The Cranberries",
+                "The Sisters Of Mercy",
+                "A Tiny One",
+                "Molchat Doma",
+                "Sad Lovers & Giants",
+                "System Of A Down",
+                "Thirty Seconds To Mars",
+                "An Broken Soul",
+            ];
+
+            function strip(bandName) {
+                return bandName.replace(/^(a |the |an )/i, "").trim();
+            }
+
+            bands.sort((a, b) => (strip(a) > strip(b) ? 1 : -1));
+
+            const time = [
+                "7.00",
+                "7.30",
+                "8.00",
+                "8.30",
+                "9.00",
+                "9.30",
+                "10.00",
+                "10.30",
+                "11.00",
+                "11.30",
+            ];
+
+            let tableHTML =
+                "<table><thead><tr><th class='band-col'>Band</th><th class='time-col'>Time</th></tr></thead><tbody>";
+
+            bands.forEach((band, index) => {
+                tableHTML += `<tr><td>${band}</td><td>${time[index]}</td></tr>`;
+            });
+
+            tableHTML += "</tbody></table>";
+            bandTable.innerHTML = tableHTML;
+            // date update
+            const dateDay = document.getElementById("date-day");
+            const dateMonth = document.getElementById("date-month");
+            const months = [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December",
+            ];
+
+            const currentDate = new Date();
+            const currentDay = ("0" + currentDate.getDate().toString()).slice(
+                -2
+            );
+            const currentMonth = months[currentDate.getMonth()];
+            dateDay.textContent = currentDay;
+            dateMonth.textContent = currentMonth;
+        </script>
+    </body>
+</html>
