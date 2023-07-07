@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Explorer Folder</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=VT323&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+    <body>
+        <div class="bg"></div>
+        <h1 class="main-heading">
+            My_video_list.folder<span class="close-btn" onclick="closeWindow()"
+                ><button>X</button></span
+            >
+        </h1>
+        <nav>
+            <button><div class="file">File</div></button>
+            <button><div class="about">About</div></button>
+            <div class="select-options">
+                <p>Select all</p>
+                <p>Unselect all</p>
+                <p onclick="closeWindow()">Exit</p>
+            </div>
+        </nav>
+        <div class="files">
+            <ul class="videos">
+                <li class="li" data-time="5:43"><span></span>Video 1</li>
+                <li data-time="2:33"><span></span>Video 2</li>
+                <li data-time="3:45"><span></span>Video 3</li>
+                <li data-time="0:47"><span></span>Video 4</li>
+                <li data-time="5:21"><span></span>Video 5</li>
+                <li data-time="6:56"><span></span>Video 6</li>
+                <li data-time="3:46"><span></span>Video 7</li>
+                <li data-time="5:25"><span></span>Video 8</li>
+                <li data-time="3:14"><span></span>Video 9</li>
+                <li data-time="3:31"><span></span>Video 10</li>
+                <li data-time="5:59"><span></span>Video 11</li>
+                <li data-time="3:07"><span></span>Video 12</li>
+                <li data-time="11:29"><span></span>Video 13</li>
+                <li data-time="8:57"><span></span>Video 14</li>
+                <li data-time="5:49"><span></span>Video 15</li>
+                <li data-time="5:52"><span></span>Video 16</li>
+                <li data-time="5:50"><span></span>Video 17</li>
+                <li data-time="9:13"><span></span>Video 18</li>
+                <li data-time="11:51"><span></span>Video 19</li>
+            </ul>
+            <div class="info">
+                <p class="duration">Total duration: 123</p>
+                |
+                <p class="count">Files Selected: 123</p>
+                |
+                <p class="size">Files size: 123</p>
+            </div>
+        </div>
+
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                overflow: hidden;
+                font-family: "VT323", monospace;
+            }
+
+            .bg {
+                position: absolute;
+                width: 100vw;
+                height: 100%;
+                background-color: whitesmoke;
+                z-index: -3;
+            }
+
+            .main-heading {
+                width: 100%;
+                text-align: center;
+                border-bottom: 3px solid black;
+                padding: 1%;
+                background-image: linear-gradient(
+                    to top,
+                    #888888,
+                    #b8b8b8,
+                    #b8b8b8,
+                    #d1d1d1,
+                    #ebebeb,
+                    #b8b8b8
+                );
+            }
+
+            .close-btn {
+                display: block;
+                position: absolute;
+                top: 1%;
+                right: 0.5%;
+            }
+
+            .close-btn > button {
+                cursor: pointer;
+                font-size: 1.4rem;
+                border: 3px solid black;
+                border-top: 3px solid #b8b8b8;
+                border-left: 3px solid #b8b8b8;
+                background-color: rgb(166, 166, 166);
+                width: 2rem;
+                height: 2rem;
+            }
+
+            .close-btn > button:active {
+                border: 1px solid #888888;
+                border-top: 2px solid #444444;
+                border-left: 2px solid #444444;
+            }
+
+            nav {
+                width: 100%;
+                border-bottom: 3px solid #444444;
+            }
+
+            nav > button {
+                border: none;
+                cursor: pointer;
+                width: 6%;
+                height: 95%;
+                font-size: 1.4em;
+                background-color: transparent;
+            }
+
+            nav > button::first-letter {
+                text-decoration: underline;
+            }
+
+            nav > button:active {
+                background-color: #b8b8b8;
+            }
+
+            .select-options {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                left: 5%;
+                top: 12%;
+                width: 10%;
+                height: auto;
+                background-color: #b8b8b8;
+                border-top: 3px solid #444444;
+                border-right: 3px solid #888888;
+                border-bottom: 2px solid #888888;
+                border-left: 3px solid #444444;
+                box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.75);
+                z-index: 3;
+            }
+
+            .select-options p {
+                cursor: pointer;
+                font-size: 1.4em;
+                border-bottom: 1px solid #888888;
+                width: 100%;
+            }
+
+            .files {
+                position: absolute;
+                width: 100%;
+                height: 88%;
+                border: 3px solid #444444;
+                border-top: 3px solid #b8b8b8;
+                border-left: 3px solid #b8b8b8;
+            }
+
+            .info {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                height: 5%;
+                background: #b8b8b8;
+                border: 3px solid #444444;
+                border-left: none;
+                border-right: none;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-end;
+                font-size: 1.3em;
+            }
+            .info p {
+                margin-right: 1%;
+                margin-left: 1%;
+            }
+            .videos {
+                position: absolute;
+                left: 50%;
+                top: 5%;
+                transform: translateX(-50%);
+                width: 90%;
+                height: auto;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+                grid-row-gap: 15px;
+            }
+            .videos li {
+                width: 80%;
+                display: flex;
+                flex-direction: column;
+                justify-content: end;
+                align-items: center;
+                list-style: none;
+                border: 2px solid lightgray;
+                background-color: whitesmoke;
+                border-radius: 1em;
+                box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px,
+                    rgba(0, 0, 0, 0.23) 0px 6px 6px;
+                cursor: pointer;
+            }
+            .videos li span {
+                margin: 5%;
+                background-image: url(./video-logo.png);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                width: 90%;
+                height: 4em;
+                display: flex;
+                justify-content: flex-end;
+                align-items: end;
+                padding: 2%;
+            }
+
+            .pressed {
+                background-color: #b8b8b8;
+            }
+        </style>
+        <script>
+            let countFiles = 0;
+            let totalDuration = 0;
+            // need to set duration and files counter function
+            const liElem = document.querySelectorAll("li");
+            liElem.forEach((el) => {
+                const time = el.getAttribute("data-time");
+                el.querySelector("span").textContent = time;
+            });
+
+            function closeWindow() {
+                window.location.href =
+                    "https://github.com/saintpvul/vanilla-js-stuff";
+            }
+            // need to split all sections to external files (css, js, html)
+            // add logic for nav buttons >>> when a file is clicked the content of selectOptions === select all, unselect all, exit. when about is clicked an info alert with a link to github should be displayed. the buttons should also respond to hotkeys F and A. additionally arrow keys should allow navigation within the select options
+            // in the file section, when one or more videos are clicked, the properties in the info line at the bottom of the page should be updated.  the select all button can be used to select all elements, and the unselect button can be used to remove the selection from all previously selected items.
+        </script>
+    </body>
+</html>
