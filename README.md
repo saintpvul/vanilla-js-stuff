@@ -38,6 +38,8 @@
 <br>
 19# Day. <a href="https://web-photo-cabin.netlify.app/" target="_blank">Web Photo Cabin</a>
 <br>
+20# Day. <a href="https://speech-recognition-note-pad.netlify.app/" target="_blank">Speech Recognition Note Pad</a>
+<br>
 31# Day. <a href="https://todo-simplest.netlify.app" target="_blank">To Do App</a>
 <br>
 32# Day. <a href="https://parallax-page-proj.netlify.app" target="_blank">Parallax WebPage</a>
