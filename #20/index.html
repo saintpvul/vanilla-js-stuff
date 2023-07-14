@@ -2,8 +2,212 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Speech Detection</title>
+        <link rel="icon" href="https://fav.farm/🔥" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Handlee&display=swap"
+            rel="stylesheet"
+        />
     </head>
-    <body></body>
+    <body>
+        <div class="words">
+            <h1>Note Pad</h1>
+            <div class="text-input-field">
+                <input type="text" id="text-input" />
+                <button onclick="addText()">Add</button>
+                <button onclick="record()" class="record">Rec</button>
+            </div>
+            <ul class="list"></ul>
+        </div>
+        <script>
+            // check browser support for SpeechRecognition API
+            window.SpeechRecognition =
+                window.SpeechRecognition || window.webkitSpeechRecognition;
+
+            // create SpeechRecognition instance
+            const recognition = new SpeechRecognition();
+            recognition.interimResults = true;
+
+            // initialize variables and DOM elements
+            let li = document.createElement("li");
+            const words = document.querySelector(".words");
+            const list = document.querySelector(".list");
+            const recordElement = document.querySelector(".record");
+
+            list.appendChild(li);
+
+            let recordStarted = false;
+
+            // event listener for speech recognition results
+            recognition.addEventListener("result", (e) => {
+                const transcript = Array.from(e.results)
+                    .map((result) => result[0])
+                    .map((result) => result.transcript)
+                    .join("");
+                li.textContent = transcript;
+
+                if (e.results[0].isFinal) {
+                    li = document.createElement("li");
+                    list.appendChild(li);
+                }
+            });
+
+            // event listener for recognition end
+            recognition.addEventListener("end", record);
+
+            // start/stop recording function
+            function record() {
+                if (!recordStarted) {
+                    recordStarted = true;
+                    recordElement.classList.add("recording");
+                    recognition.start();
+                } else {
+                    recordStarted = false;
+                    recordElement.classList.remove("recording");
+                    recognition.stop();
+                    recognition.abort();
+                }
+            }
+
+            // add text from input function
+            function addText() {
+                const input = document.getElementById("text-input");
+                let text = input.value.trim();
+
+                if (text === "") {
+                    return;
+                }
+
+                li.textContent = text;
+                list.appendChild(li);
+
+                input.value = "";
+                li = document.createElement("li");
+                list.appendChild(li);
+            }
+
+            // strikethrough of an element
+
+            list.addEventListener("click", (event) => {
+                if (event.target.tagName === "LI") {
+                    const li = event.target;
+                    if (li.style.textDecoration === "line-through") {
+                        li.style.textDecoration = "";
+                    } else if (li.textContent != "") {
+                        li.style.textDecoration = "line-through";
+                    }
+                }
+            });
+        </script>
+
+        <style>
+            html {
+                font-size: 10px;
+            }
+
+            body {
+                background: #c9ebf4;
+                font-family: "Handlee", cursive;
+                font-weight: 200;
+                font-size: 20px;
+            }
+
+            .words {
+                max-width: 500px;
+                margin: 50px auto;
+                background: white;
+                border-radius: 5px;
+                box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+                padding: 1rem 2rem 1rem 5rem;
+                background: -webkit-gradient(
+                        linear,
+                        0 0,
+                        0 100%,
+                        from(#d9eaf3),
+                        color-stop(4%, #fff)
+                    )
+                    0 4px;
+                background-size: 100% 3rem;
+                position: relative;
+                line-height: 3rem;
+            }
+
+            .text-input-field {
+                width: 100%;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                border: 1px solid;
+            }
+
+            #text-input {
+                width: 70%;
+                border: none;
+            }
+
+            .text-input-field > button {
+                width: 15%;
+                margin-left: 0.5%;
+                cursor: pointer;
+                background-color: #fff;
+                border: 1px solid;
+                border-top: none;
+                border-bottom: none;
+                border-right: none;
+            }
+
+            .record::after {
+                display: none;
+            }
+
+            .record.recording::after {
+                display: inline;
+                position: absolute;
+                content: "•";
+                padding-left: 0.5%;
+                margin-top: -1.6%;
+                font-size: 3rem;
+                color: red;
+                animation: blink 1s infinite;
+            }
+
+            @keyframes blink {
+                0% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
+
+            .list {
+                margin-left: -2.5em;
+                list-style-type: disc;
+            }
+
+            li {
+                cursor: pointer;
+                font-size: 2em;
+                margin: 0 0 3rem;
+                padding-left: 1em;
+                transition: all 0.3s ease;
+            }
+
+            .words:before {
+                content: "";
+                position: absolute;
+                width: 4px;
+                top: 0;
+                left: 30px;
+                bottom: 0;
+                border: 1px solid;
+                border-color: transparent #efe4e4;
+            }
+        </style>
+    </body>
 </html>
