@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Photo Cabin</title>
+        <link rel="stylesheet" href="./src/style.css" />
+        <link rel="icon" href="./src/shot-icon.png" />
+    </head>
+    <body>
+        <div class="photobooth">
+            <div class="controls">
+                <button onclick="takePhoto()">Take Photo</button>
+                <button onclick="applyRedFilter()">Red Filter</button>
+                <button onclick="applyGhostFilter()">Ghost Filter</button>
+                <button onclick="applyGreenScreen()">Green Screen</button>
+                <input type="color" id="color-input" value="#9e71dd" />
+                <button onclick="resetAll()" id="reset-all">RESET</button>
+            </div>
+            <canvas class="photo"></canvas>
+            <video class="player" autoplay></video>
+            <div class="strip"><h1>Your Photos</h1></div>
+        </div>
+
+        <audio class="snap" src="./src/snap-sound.mp3" hidden></audio>
+
+        <script src="./src/main.js"></script>
+    </body>
+</html>
