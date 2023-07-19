@@ -4,6 +4,7 @@ html {
     font-size: 20px;
     font-weight: 200;
     font-family: "Ysabeau SC", sans-serif;
+    overflow-x: hidden;
 }
 
 body {
@@ -19,19 +20,35 @@ body {
 header {
     text-align: center;
     height: 100vh;
-    background-image: url(./img/op-2.jpg);
-    background-repeat: no-repeat;
-    background-position: bottom;
-    background-size: cover;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     text-shadow: 3px 4px 0 rgba(0, 0, 0, 0.2);
+    background-color: black;
+}
+
+#heading-bg {
+    background-image: url(./img/bg/op-1.jpg);
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    filter: brightness(85%);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
 }
 
 header > h1 {
     font-size: 10vw;
+    z-index: 2;
 }
 
 nav {
@@ -44,18 +61,17 @@ nav {
 }
 
 nav ul {
-    margin: 0;
+    margin: 0 5%;
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-between;
     text-align: center;
     align-items: center;
 }
 
 li.logo {
-    margin-left: -15%;
     background-image: url(./img/image-logo.png);
     background-repeat: no-repeat;
     background-size: cover;
@@ -73,17 +89,6 @@ li.logo:hover {
     filter: invert(20%);
 }
 
-.site-wrap {
-    max-width: 700px;
-    height: 80vh;
-    margin: 1% auto;
-    background: white;
-    padding: 40px;
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
-    transform: scale(0.98);
-    transition: transform 0.5s;
-}
-
 nav li {
     cursor: pointer;
     padding: 20px;
@@ -97,7 +102,179 @@ nav li:hover {
     color: grey;
 }
 
+.about-btn {
+    color: grey;
+}
+
+/* main section */
+
+main {
+    position: relative;
+    width: 100%;
+    min-height: 90vh;
+    z-index: 0;
+}
+
+.site-wrap {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 640px;
+    max-width: 780px;
+    min-height: 80vh;
+    background: white;
+    transition: transform 0.5s;
+    font-weight: 400;
+    font-size: 0.75em;
+    z-index: 0;
+}
+
+.about,
+.catalog,
+.locations {
+    position: absolute;
+    background: white;
+    padding: 3%;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.15);
+    transition: all 0.5s;
+}
+
+.showcase {
+    position: absolute;
+    top: -10%;
+    left: -100%;
+    width: 300%;
+    height: 120%;
+    z-index: -1;
+    transition: opacity 0.5s;
+}
+
+.about-showcase {
+    display: block;
+}
+
+.left {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40vw;
+    height: 100%;
+    background-image: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 70%,
+            rgba(245, 245, 245, 1) 100%
+        ),
+        url(./img/about/workshop.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: opacity 1s;
+}
+
+.right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40vw;
+    height: 100%;
+    background-image: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0) 70%,
+            rgba(245, 245, 245, 1) 100%
+        ),
+        url(./img/about/style-development.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: opacity 1s;
+}
+
+.about-left {
+    background-image: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 70%,
+            rgba(245, 245, 245, 1) 100%
+        ),
+        url(./img/about/workshop.jpg);
+}
+
+.about-right {
+    background-image: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0) 70%,
+            rgba(245, 245, 245, 1) 100%
+        ),
+        url(./img/about/style-development.jpg);
+}
+
+.catalog,
+.locations {
+    display: none;
+}
+
+.locations-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: left;
+    align-items: flex-start;
+    flex: 1;
+}
+
+.location h2 {
+    border-bottom: 2px solid #dddddd;
+}
+
+.location {
+    border-right: 2px solid #dddddd;
+}
+
+.location a {
+    color: black;
+    text-decoration: none;
+}
+
+.location:last-child {
+    padding-left: 2%;
+    border: none;
+}
+
+.map {
+    margin: 5%;
+    height: 55%;
+    width: 90%;
+}
+
+.locations-showcase {
+    display: none;
+}
+
+.locations-left {
+    background-image: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 70%,
+            rgba(245, 245, 245, 1) 100%
+        ),
+        url(./img/locations/map.jpg);
+}
+
+.locations-right {
+    background-image: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 0) 70%,
+            rgba(245, 245, 245, 1) 100%
+        ),
+        url(./img/locations/compass.jpg);
+    background-position: center;
+}
+
+/* footer section */
+
 footer {
+    position: relative;
+    z-index: 1;
     width: 100%;
     height: 10vh;
     background: black;
@@ -107,6 +284,7 @@ footer {
     justify-content: center;
     flex-direction: row;
 }
+
 footer > h4 {
     font-weight: 200;
     cursor: pointer;
@@ -124,14 +302,16 @@ footer > ul {
     justify-content: space-around;
     list-style: none;
 }
+
 .links {
     position: absolute;
     right: 5%;
 }
 
 .links li {
-    width: 2.5vw;
-    height: 5vh;
+    width: 20%;
+    min-width: 30px;
+    aspect-ratio: 1 / 1;
     background-color: white;
     border-radius: 50%;
     border: 3px solid white;

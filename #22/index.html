@@ -11,22 +11,141 @@
             href="https://fonts.googleapis.com/css2?family=Ysabeau+SC:wght@200;400&display=swap"
             rel="stylesheet"
         />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        />
     </head>
     <body>
         <header>
-            <h1 id="main-head"></h1>
+            <div class="overlay" id="heading-bg"></div>
+            <h1 id="header-head"></h1>
         </header>
 
-        <nav id="main">
+        <nav id="main-nav">
             <ul>
                 <li class="logo" onclick="reloadPage()"><a href="#"></a></li>
-                <li onclick="showAbout()">About</li>
-                <li onclick="showImages()">Images</li>
-                <li onclick="showLocations()">Locations</li>
+                <li onclick="showAbout()" class="about-btn">About</li>
+                <li onclick="showCatalog()" class="catalog-btn">Catalog</li>
+                <li onclick="showLocations()" class="locations-btn">
+                    Locations
+                </li>
             </ul>
         </nav>
+        <main>
+            <div class="site-wrap">
+                <div class="about">
+                    <p>
+                        Welcome to the world of MessDepot - a clothing brand
+                        born in the picturesque town of Elarin, nestled in the
+                        heart of the enchanting country of Arvanna.
+                    </p>
 
-        <div class="site-wrap"></div>
+                    <p>
+                        Our story began with a dream of freedom in choosing what
+                        truly resonates with you, not what the market dictates.
+                        Founded in the early 2000s by a group of passionate and
+                        creative young minds, MessDepot emerged as a brand that
+                        celebrates individuality and uniqueness.
+                    </p>
+
+                    <p>
+                        Our dedicated team of designers pours love and
+                        creativity into each and every creation, crafting pieces
+                        that add vibrancy and style to your everyday life. We
+                        believe that every garment should be special and
+                        meaningful, reflecting a rich history and unique story.
+                    </p>
+
+                    <p>
+                        Our target audience comprises individuals who value
+                        quality, functionality, and comfort but do not wish to
+                        overspend on expensive brands. Instead, they seek
+                        timeless pieces that remain relevant and fashionable
+                        throughout the years.
+                    </p>
+
+                    <p>
+                        At MessDepot, we understand the value of your time, and
+                        each design is meticulously curated to align with
+                        contemporary trends and preferences. We ensure that our
+                        garments serve you for years, maintaining their
+                        relevance and charm.
+                    </p>
+
+                    <p>
+                        MessDepot is not merely a clothing brand; it embodies a
+                        philosophy and way of life. We want each and every one
+                        of you to feel exceptional and confident while adorning
+                        our creations. Welcome to our MessDepot family, where
+                        style and uniqueness are the foremost criteria of
+                        choice!
+                    </p>
+
+                    <p>
+                        [Please note that the country of Arvanna is entirely
+                        fictional and exists only in the creative world of
+                        MessDepot.]
+                    </p>
+                    <div class="showcase about-showcase">
+                        <div class="left about-left"></div>
+                        <div class="right about-right"></div>
+                    </div>
+                </div>
+                <div class="catalog"></div>
+                <div class="locations">
+                    <div class="showcase locations-showcase">
+                        <div class="left locations-left"></div>
+                        <div class="right locations-right"></div>
+                    </div>
+                    <div class="locations-flex">
+                        <div class="location" id="new-york">
+                            <h2>New York City</h2>
+                            <p>Address: 123 Broadway, New York, NY 10001</p>
+                            <p>
+                                Phone:
+                                <a href="tel:+15551234567"
+                                    >+1 (555) 123-4567<i
+                                        class="fas fa-phone-alt"
+                                    ></i
+                                ></a>
+                            </p>
+                            <p>
+                                Email:
+                                <a href="mailto:nyc@example.com"
+                                    >nyc@example.com
+                                    <i class="far fa-envelope"></i>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="location" id="london">
+                            <h2>London</h2>
+                            <p>Address: 456 Oxford Street, London W1D 1AB</p>
+                            <p>
+                                Phone:
+                                <a href="tel:+442012345678"
+                                    >+44 20 1234 5678
+                                    <i class="fas fa-phone-alt"></i
+                                ></a>
+                            </p>
+                            <p>
+                                Email:
+                                <a href="mailto:london@example.com"
+                                    >london@example.com
+                                    <i class="far fa-envelope"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="map" id="map"></div>
+                </div>
+            </div>
+        </main>
+
         <footer>
             <h4 onclick="reloadPage()">MessDepot ® Since 2023</h4>
             <ul class="links">
@@ -41,6 +160,7 @@
                 </li>
             </ul>
         </footer>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
         <script src="./src/main.js"></script>
     </body>
 </html>
