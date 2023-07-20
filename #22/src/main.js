@@ -139,11 +139,15 @@ function startBgImageInterval() {
 function reloadPage() {
     showAbout();
     window.location.reload();
+    window.location.href = "#";
 }
 
 // Main section
 
 // Getting access
+
+const wrapper = document.querySelector(".site-wrap");
+
 const about = document.querySelector(".about");
 const aboutBtn = document.querySelector(".about-btn");
 const aboutShowcase = document.querySelector(".about-showcase");
@@ -161,6 +165,8 @@ const locationsBtn = document.querySelector(".locations-btn");
 const locationsShowcase = document.querySelector(".locations-showcase");
 const locationsLeft = document.querySelector(".locations-left");
 const locationsRight = document.querySelector(".locations-right");
+
+const main = document.querySelector("main");
 // Navbar buttons functions
 
 const transitionDuration = 1000; // 1 second
@@ -190,8 +196,10 @@ function showAbout() {
         hideElement(locations);
         hideElement(locationsShowcase);
         hideElement(catalog);
+        wrapper.style.minWidth = "640px";
         showElement(about);
         showElement(aboutShowcase);
+        main.style.minHeight = "90vh";
     }
 }
 
@@ -206,7 +214,9 @@ function showCatalog() {
         hideElement(aboutShowcase);
         hideElement(about);
         hideElement(aboutShowcase);
+        wrapper.style.minWidth = "780px";
         showElement(catalog);
+        main.style.minHeight = "215vh";
     }
 }
 
@@ -220,10 +230,28 @@ function showLocations() {
         hideElement(about);
         hideElement(aboutShowcase);
         hideElement(catalog);
+        wrapper.style.minWidth = "640px";
         showElement(locations);
         showElement(locationsShowcase);
+        main.style.minHeight = "90vh";
     }
 }
+
+// sticky nav function
+
+const nav = document.getElementById("main-nav");
+const topOfNav = nav.offsetTop;
+
+function fixNav() {
+    if (window.scrollY >= topOfNav) {
+        document.body.style.paddingTop = nav.offsetHeight + "px";
+        document.body.classList.add("fixed-nav");
+    } else {
+        document.body.style.paddingTop = 0;
+        document.body.classList.remove("fixed-nav");
+    }
+}
+window.addEventListener("scroll", fixNav);
 
 // About-showcase images and it's update
 
@@ -261,6 +289,24 @@ const getAboutShowcaseImages = (side) => {
     }
     return currentImage;
 };
+
+// product images
+
+const productImages = [
+    "./src/img/clothes/cl-1.jpg",
+    "./src/img/clothes/cl-5.jpg",
+    "./src/img/clothes/cl-2.jpg",
+    "./src/img/clothes/cl-3.jpg",
+    "./src/img/clothes/cl-4.jpg",
+    "./src/img/clothes/cl-6.jpg",
+];
+
+const products = document.querySelectorAll(".product");
+
+products.forEach((product, idx) => {
+    product.style.backgroundImage = setImageByUrl(productImages[idx]);
+});
+
 // Function to animate about showcase side-bg images
 function startAboutShowcaseIntervals() {
     aboutShowcaseLeftInterval = setInterval(() => {
@@ -321,3 +367,5 @@ function initMap() {
 
 // Initialize the map
 initMap();
+
+// Usage example
